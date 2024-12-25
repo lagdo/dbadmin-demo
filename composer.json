@@ -1,0 +1,27 @@
+{
+    "name": "lagdo/dbadmin-demo",
+    "type": "application",
+    "description": "Simple demo for the Jaxon DbAdmin Database management dashboard",
+    "authors": [
+        {
+            "name": "Thierry Feuzeu",
+            "email": "thierry.feuzeu@gmail.com"
+        }
+    ],
+    "homepage": "https://github.com/lagdo/dbadmin-demo",
+    "license": "Apache-2.0",
+    "keywords": ["Database", "Admin", "Sql", "Dashboard", "Jaxon", "Ajax", "PostgreSQL", "MySQL", "Sqlite"],
+    "support": {
+        "issues": "https://github.com/lagdo/dbadmin-demo/issues",
+        "source": "https://github.com/lagdo/dbadmin-demo"
+    },
+    "require": {
+        "php": ">=7.1.0",
+        "lagdo/dbadmin-driver-pgsql": "dev-main",
+        "lagdo/dbadmin-driver-mysql": "dev-main",
+        "lagdo/dbadmin-driver-sqlite": "dev-main",
+        "lagdo/ui-builder-bootstrap5": "dev-main"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
