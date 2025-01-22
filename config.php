@@ -28,6 +28,13 @@ return [
                 ],
             ],
         ],
+        'dialogs' => [
+            'default' => [
+                'modal' => 'bootbox',
+                'alert' => 'toastr',
+                'confirm' => 'noty',
+            ],
+        ],
     ],
     'lib' => [
         'core' => [
@@ -51,13 +58,6 @@ return [
                 'uri' => '/jaxon',
                 'dir' => __DIR__ . '/public/jaxon',
                 // 'file' => '',
-            ],
-        ],
-        'dialogs' => [
-            'default' => [
-                'modal' => 'bootbox',
-                'message' => 'toastr',
-                'question' => 'noty',
             ],
         ],
     ],
