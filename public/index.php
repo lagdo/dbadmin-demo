@@ -6,7 +6,7 @@
 
             <div id="layoutSidenav_content">
                 <main>
-                    <div class="container-fluid px-4" <?php echo Jaxon\attr()->bind(Jaxon\rq(Lagdo\DbAdmin\App\Ajax\Admin::class)) ?>>
+                    <div class="container-fluid px-4" <?php echo Jaxon\attr()->bind(Jaxon\rq(Lagdo\DbAdmin\Ajax\App\Admin::class)) ?>>
 <?php echo Jaxon\jaxon()->package(Lagdo\DbAdmin\Package::class)->getHtml() ?>
                     </div>
                 </main>
