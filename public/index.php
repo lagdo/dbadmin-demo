@@ -49,7 +49,7 @@ echo $jaxon->getCss(), "\n";
             </div>
 
             <div id="layoutSidenav_content">
-                <main>
+                <main id="jaxon-dbadmin">
                     <div class="container-fluid px-4" <?php echo attr()->bind(rq(Content::class)) ?> style="padding-top: 10px;">
                         <?php echo cl(Content::class)->html() ?>
                     </div>
