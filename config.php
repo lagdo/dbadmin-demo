@@ -9,18 +9,26 @@ return [
             Lagdo\DbAdmin\Package::class => [
                 'servers' => [
                     // The database servers
-                    'postgresql-14' => [ // A unique identifier for this server
+                    'db-postgresql' => [ // A unique identifier for this server
                         'driver' => 'pgsql',
                         'name' => 'PostgreSQL 14',     // The name to be displayed in the dashboard UI.
-                        'host' => 'postgresql-14',     // The database host name or address.
+                        'host' => 'db-postgresql',     // The database host name or address.
                         'port' => 5432,      // The database port. Optional.
                         'username' => 'postgres', // The database user credentials.
                         'password' => 'dbadmin', // The database user credentials.
                     ],
-                    'mysql-5' => [ // A unique identifier for this server
+                    'db-mariadb' => [ // A unique identifier for this server
                         'driver' => 'mysql',
-                        'name' => 'MySQL 5',     // The name to be displayed in the dashboard UI.
-                        'host' => 'mysql-5',     // The database host name or address.
+                        'name' => 'MariaDB 10',     // The name to be displayed in the dashboard UI.
+                        'host' => 'db-mariadb',     // The database host name or address.
+                        'port' => 3306,      // The database port. Optional.
+                        'username' => 'root', // The database user credentials.
+                        'password' => 'dbadmin', // The database user credentials.
+                    ],
+                    'db-mysql' => [ // A unique identifier for this server
+                        'driver' => 'mysql',
+                        'name' => 'MySQL 8',     // The name to be displayed in the dashboard UI.
+                        'host' => 'db-mysql',     // The database host name or address.
                         'port' => 3306,      // The database port. Optional.
                         'username' => 'root', // The database user credentials.
                         'password' => 'dbadmin', // The database user credentials.
