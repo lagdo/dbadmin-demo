@@ -5,6 +5,14 @@ return [
         'ui' => [
             'template' => 'bootstrap5',
         ],
+        'container' => [
+            'set' => [
+                Psr\Log\LoggerInterface::class => function() {
+                    $logFilePath = '/var/www/dbadmin-demo/logs/dbadmin';
+                    return new Lagdo\DbAdmin\Demo\Log\Logger($logFilePath);
+                },
+            ],
+        ],
         'packages' => [
             Lagdo\DbAdmin\Package::class => [
                 'servers' => [

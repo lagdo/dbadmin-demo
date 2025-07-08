@@ -23,6 +23,11 @@
         "lagdo/facades": "^1.0",
         "lagdo/ui-builder-bootstrap5": "dev-main"
     },
+    "autoload": {
+        "psr-4": {
+            "Lagdo\\DbAdmin\\Demo\\": "src/"
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
