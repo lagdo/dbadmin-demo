@@ -20,6 +20,7 @@
         "lagdo/dbadmin-driver-pgsql": "dev-main",
         "lagdo/dbadmin-driver-mysql": "dev-main",
         "lagdo/dbadmin-driver-sqlite": "dev-main",
+        "lagdo/facades": "^1.0",
         "lagdo/ui-builder-bootstrap5": "dev-main"
     },
     "minimum-stability": "dev",
