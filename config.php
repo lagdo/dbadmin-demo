@@ -15,6 +15,10 @@ return [
         ],
         'packages' => [
             Lagdo\DbAdmin\Package::class => [
+                'access' => [
+                    'server' => true,
+                    'system' => true,
+                ],
                 'servers' => [
                     // The database servers
                     'db-postgresql' => [ // A unique identifier for this server

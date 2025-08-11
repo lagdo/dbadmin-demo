@@ -17,8 +17,8 @@
 <?php
 require __DIR__ . '/../jaxon.php';
 
-use Lagdo\DbAdmin\Ajax\App\Content;
 use Lagdo\DbAdmin\Ajax\App\Sidebar;
+use Lagdo\DbAdmin\Ajax\App\Wrapper;
 
 use function Jaxon\attr;
 use function Jaxon\cl;
@@ -50,8 +50,8 @@ echo $jaxon->getCss(), "\n";
 
             <div id="layoutSidenav_content">
                 <main id="jaxon-dbadmin">
-                    <div class="container-fluid px-4" <?php echo attr()->bind(rq(Content::class)) ?> style="padding-top: 10px;">
-                        <?php echo cl(Content::class)->html() ?>
+                    <div class="container-fluid px-4" <?php echo attr()->bind(rq(Wrapper::class)) ?> style="padding-top: 10px;">
+                        <?php echo cl(Wrapper::class)->html() ?>
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
