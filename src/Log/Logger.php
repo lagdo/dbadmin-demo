@@ -114,12 +114,12 @@ class Logger implements LoggerInterface
     /**
      * Write a message to the log file.
      *
-     * @param string|\Stringable $message  $message The message to log.
+     * @param mixed  $message The message to log.
      * @param string $level   The log level.
      *
      * @return void
      */
-    private function write(string|\Stringable $message, string $level = 'INFO'): void
+    private function write($message, string $level = 'INFO'): void
     {
         $timestamp = date('Y-m-d H:i:s');
         $logEntry = "[$timestamp] [$level] $message" . PHP_EOL;
@@ -131,7 +131,7 @@ class Logger implements LoggerInterface
     /**
      * @inheritDoc
      */
-    public function log($level, string|\Stringable $message, array $context = []): void
+    public function log($level, $message, array $context = []): void
     {
         if (!in_array($level, $this->getLogLevels(), true)) {
             throw new InvalidArgumentException("Invalid log level: $level");
@@ -144,7 +144,7 @@ class Logger implements LoggerInterface
     /**
      * @inheritDoc
      */
-    public function debug(string|\Stringable $message, array $context = []): void
+    public function debug($message, array $context = []): void
     {
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
         $traceInfo = array_map(
