@@ -17,7 +17,7 @@ return [
             Lagdo\DbAdmin\Package::class => [
                 'access' => [
                     'server' => true,
-                    'system' => true,
+                    'system' => false,
                 ],
                 'servers' => [
                     // The database servers
