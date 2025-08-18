@@ -17,11 +17,11 @@
     },
     "require": {
         "php": ">=7.1.0",
-        "lagdo/dbadmin-driver-pgsql": "dev-main",
-        "lagdo/dbadmin-driver-mysql": "dev-main",
-        "lagdo/dbadmin-driver-sqlite": "dev-main",
+        "lagdo/dbadmin-driver-pgsql": "^0.12",
+        "lagdo/dbadmin-driver-mysql": "^0.12",
+        "lagdo/dbadmin-driver-sqlite": "^0.12",
         "lagdo/facades": "^1.0",
-        "lagdo/ui-builder-bootstrap5": "dev-main"
+        "lagdo/ui-builder-bootstrap5": "^0.1"
     },
     "autoload": {
         "psr-4": {
