@@ -2,5 +2,6 @@ composer.phar
 composer.lock
 /vendor/
 /build/
+/public/jaxon/
 /.idea/
 /logs/*log

@@ -1,5 +1,8 @@
 <?php
 
+use Lagdo\DbAdmin\Config\AuthInterface;
+use Lagdo\DbAdmin\Config\UserFileReader;
+
 return [
     'app' => [
         'ui' => [
@@ -11,45 +14,34 @@ return [
                     $logFilePath = '/var/www/dbadmin-demo/logs/dbadmin';
                     return new Lagdo\DbAdmin\Demo\Log\Logger($logFilePath);
                 },
+                AuthInterface::class => function() {
+                    return new class implements AuthInterface {
+                        public function user(): string
+                        {
+                            return '';
+                        }
+                        public function group(): string
+                        {
+                            return ''; // No user groups.
+                        }
+                    };
+                },
+                UserFileReader::class => function($di) {
+                    $auth = $di->get(AuthInterface::class);
+                    $cfgFilePath = '/var/www/dbadmin-demo/dbadmin.php';
+                    return new UserFileReader($auth, $cfgFilePath);
+                }
             ],
         ],
         'packages' => [
             Lagdo\DbAdmin\Package::class => [
+                'provider' => function(array $options) {
+                    $reader = jaxon()->di()->get(UserFileReader::class);
+                    return $reader->getOptions($options);
+                },
                 'access' => [
                     'server' => true,
                     'system' => false,
-                ],
-                'servers' => [
-                    // The database servers
-                    'db-postgresql' => [ // A unique identifier for this server
-                        'driver' => 'pgsql',
-                        'name' => 'PostgreSQL 14',     // The name to be displayed in the dashboard UI.
-                        'host' => 'db-postgresql',     // The database host name or address.
-                        'port' => 5432,      // The database port. Optional.
-                        'username' => 'postgres', // The database user credentials.
-                        'password' => 'dbadmin', // The database user credentials.
-                    ],
-                    'db-mariadb' => [ // A unique identifier for this server
-                        'driver' => 'mysql',
-                        'name' => 'MariaDB 10',     // The name to be displayed in the dashboard UI.
-                        'host' => 'db-mariadb',     // The database host name or address.
-                        'port' => 3306,      // The database port. Optional.
-                        'username' => 'root', // The database user credentials.
-                        'password' => 'dbadmin', // The database user credentials.
-                    ],
-                    'db-mysql' => [ // A unique identifier for this server
-                        'driver' => 'mysql',
-                        'name' => 'MySQL 8',     // The name to be displayed in the dashboard UI.
-                        'host' => 'db-mysql',     // The database host name or address.
-                        'port' => 3306,      // The database port. Optional.
-                        'username' => 'root', // The database user credentials.
-                        'password' => 'dbadmin', // The database user credentials.
-                    ],
-                    'sqlite-3' => [ // A unique identifier for this server/var/www
-                        'driver' => 'sqlite',
-                        'name' => 'Sqlite 3',     // The name to be displayed in the dashboard UI.
-                        'directory' => '/var/lib/sqlite/3', // The directory containing the database files.
-                    ],
                 ],
             ],
         ],
