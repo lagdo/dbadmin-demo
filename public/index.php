@@ -28,7 +28,6 @@ use function Jaxon\cl;
 use function Jaxon\rq;
 
 $jaxon = Jaxon\jaxon();
-$package = $jaxon->package(Lagdo\DbAdmin\Package::class);
 echo $jaxon->getCss(), "\n";
 ?>
   </head>

@@ -20,9 +20,9 @@ return [
                         {
                             return '';
                         }
-                        public function group(): string
+                        public function role(): string
                         {
-                            return ''; // No user groups.
+                            return ''; // No user roles.
                         }
                     };
                 },
