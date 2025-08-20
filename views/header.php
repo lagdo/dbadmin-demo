@@ -21,7 +21,7 @@ echo $jaxon->getCss(), "\n";
     </style>
   </head>
   <body class="sb-nav-fixed sb-sidenav-toggled">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-primary">
       <!-- Navbar Brand-->
       <a class="navbar-brand ps-3" href="index.html">Jaxon DbAdmin Demo</a>
     </nav>

@@ -16,6 +16,13 @@
       .row {
         margin-bottom: 10px;
       }
+      .sb-sidenav-menu {
+        padding-top: 20px;
+        padding-left: 7px;
+      }
+      .sb-sidenav-menu > .row {
+        margin-right: 0px;
+      }
     </style>
 <?php
 require __DIR__ . '/../jaxon.php';
@@ -32,7 +39,7 @@ echo $jaxon->getCss(), "\n";
 ?>
   </head>
   <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-primary">
       <!-- Navbar Brand-->
       <a class="navbar-brand ps-3" href="index.html">Jaxon DbAdmin Demo</a>
       <!-- Sidebar Toggle-->
@@ -42,17 +49,15 @@ echo $jaxon->getCss(), "\n";
     <div id="layoutSidenav">
       <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion" id="sidenavAccordion">
-          <div class="sb-sidenav-menu" style="padding: 10px 0 0 10px;">
-            <div class="nav" <?php echo attr()->bind(rq(Sidebar::class)) ?>>
-              <?php echo cl(Sidebar::class)->html() ?>
-            </div>
+          <div class="sb-sidenav-menu" <?php echo attr()->bind(rq(Sidebar::class)) ?>>
+            <?php echo cl(Sidebar::class)->html() ?>
           </div>
         </nav>
       </div>
 
       <div id="layoutSidenav_content">
         <main id="jaxon-dbadmin">
-          <div class="container-fluid px-4" <?php echo attr()->bind(rq(Wrapper::class)) ?> style="padding-top: 10px;">
+          <div class="container-fluid" <?php echo attr()->bind(rq(Wrapper::class)) ?>>
             <?php echo cl(Wrapper::class)->html() ?>
           </div>
         </main>

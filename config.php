@@ -14,8 +14,8 @@ return [
                     $logFilePath = '/var/www/dbadmin-demo/logs/dbadmin';
                     return new Lagdo\DbAdmin\Demo\Log\Logger($logFilePath);
                 },
-                AuthInterface::class => function() {
-                    return new class implements AuthInterface {
+                AuthInterface::class => fn() =>
+                    new class implements AuthInterface {
                         public function user(): string
                         {
                             return '';
@@ -24,8 +24,7 @@ return [
                         {
                             return ''; // No user roles.
                         }
-                    };
-                },
+                    },
                 UserFileReader::class => function($di) {
                     $auth = $di->get(AuthInterface::class);
                     $cfgFilePath = '/var/www/dbadmin-demo/dbadmin.php';
@@ -40,7 +39,7 @@ return [
                     return $reader->getOptions($options);
                 },
                 'access' => [
-                    'server' => true,
+                    'server' => false,
                     'system' => false,
                 ],
             ],
