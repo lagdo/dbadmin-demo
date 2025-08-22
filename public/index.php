@@ -82,5 +82,11 @@ echo $jaxon->getCss(), "\n";
   <script src="sb-admin/dist/js/scripts.js"></script>
 <?php
 echo $jaxon->getJs(), "\n", $jaxon->getScript(), "\n";
+$readyScript = $jaxon->di()->g(Lagdo\DbAdmin\Package::class)->getReadyScript();
 ?>
+<?php if($readyScript !== ''): ?>
+<script type='text/javascript'>
+  jaxon.dom.ready(() => <?= $readyScript ?>);
+</script>
+<?php endif ?>
 </html>

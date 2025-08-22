@@ -3,9 +3,10 @@
 return [
     'common' => [
         'access' => [
-            'server' => false,
+            'server' => true,
             'system' => false,
         ],
+        'default' => 'db-mariadb',
     ],
     'fallback' => [
         'servers' => [
