@@ -1,6 +1,5 @@
 <?php
 
-use Lagdo\DbAdmin\Config\AuthInterface;
 use Lagdo\DbAdmin\Config\UserFileReader;
 
 return [
@@ -11,36 +10,41 @@ return [
         'container' => [
             'set' => [
                 Psr\Log\LoggerInterface::class => function() {
-                    $logFilePath = '/var/www/dbadmin-demo/logs/dbadmin';
+                    $logFilePath = __DIR__ . '/logs/dbadmin';
                     return new Lagdo\DbAdmin\Demo\Log\Logger($logFilePath);
                 },
-                AuthInterface::class => fn() =>
-                    new class implements AuthInterface {
-                        public function user(): string
-                        {
-                            return '';
-                        }
-                        public function role(): string
-                        {
-                            return ''; // No user roles.
-                        }
-                    },
-                UserFileReader::class => function($di) {
-                    $auth = $di->get(AuthInterface::class);
-                    $cfgFilePath = '/var/www/dbadmin-demo/dbadmin.php';
-                    return new UserFileReader($auth, $cfgFilePath);
-                }
             ],
         ],
         'packages' => [
             Lagdo\DbAdmin\Package::class => [
                 'provider' => function(array $options) {
+                    $cfgFilePath = __DIR__ . '/dbadmin.php';
                     $reader = jaxon()->di()->get(UserFileReader::class);
-                    return $reader->getOptions($options);
+                    return $reader->getOptions($cfgFilePath, $options);
                 },
                 'access' => [
                     'server' => false,
                     'system' => false,
+                ],
+                'storage' => [
+                    'options' => [
+                        'audit' => [
+                            'enabled' => true,
+                        ],
+                        'history' => [
+                            'enabled' => true,
+                            'limit' => 10,
+                        ],
+                        'user' => [
+                            'enabled' => true,
+                        ],
+                    ],
+                    'database' => [
+                        // Same as the "servers" items, but "name" is the database name.
+                        'driver' => 'sqlite',
+                        'directory' => '/var/lib/sqlite/3',
+                        'name' => 'chinook.db',
+                    ],
                 ],
             ],
         ],
