@@ -20,7 +20,6 @@
         "lagdo/dbadmin-driver-pgsql": "^0.12",
         "lagdo/dbadmin-driver-mysql": "^0.12",
         "lagdo/dbadmin-driver-sqlite": "^0.12",
-        "lagdo/facades": "^1.0",
         "lagdo/ui-builder-bootstrap5": "^0.1"
     },
     "autoload": {
