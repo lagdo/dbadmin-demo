@@ -36,6 +36,7 @@ return [
                         ],
                         'history' => [
                             'enabled' => true,
+                            'distinct' => true,
                             'limit' => 10,
                         ],
                     ],
