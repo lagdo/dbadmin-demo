@@ -26,17 +26,17 @@ return [
                     'server' => false,
                     'system' => false,
                 ],
-                'storage' => [
+                'logging' => [
                     'options' => [
-                        'audit' => [
+                        'library' => [
+                            'enabled' =>false,
+                        ],
+                        'enduser' => [
                             'enabled' => true,
                         ],
                         'history' => [
                             'enabled' => true,
                             'limit' => 10,
-                        ],
-                        'user' => [
-                            'enabled' => true,
                         ],
                     ],
                     'database' => [
