@@ -17,9 +17,9 @@
     },
     "require": {
         "php": ">=7.1.0",
-        "lagdo/dbadmin-driver-pgsql": "^0.12",
-        "lagdo/dbadmin-driver-mysql": "^0.12",
-        "lagdo/dbadmin-driver-sqlite": "^0.12",
+        "lagdo/dbadmin-driver-pgsql": "^0.13",
+        "lagdo/dbadmin-driver-mysql": "^0.13",
+        "lagdo/dbadmin-driver-sqlite": "^0.13",
         "lagdo/ui-builder-bootstrap5": "^0.1"
     },
     "autoload": {
