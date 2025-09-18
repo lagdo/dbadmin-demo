@@ -27,4 +27,4 @@ $callback = fn(AppException $e) => $alert->title('Warning')->warning($e->getMess
 jaxon()->callback()->error($callback, AppException::class);
 
 jaxon()->di()->val('jaxon_annotations_cache_dir', '/var/cache/jaxon');
-jaxon()->app()->setup(__DIR__ . '/config.php');
+jaxon()->app()->setup(__DIR__ . '/dbadmin.php');

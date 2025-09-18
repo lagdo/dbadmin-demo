@@ -1,44 +1,84 @@
 <?php
 
+use Lagdo\DbAdmin\Config\UserFileReader;
+
 return [
-    'common' => [
-        'access' => [
-            'server' => true,
-            'system' => false,
+    'app' => [
+        'ui' => [
+            'template' => 'bootstrap5',
         ],
-        'default' => 'db-mariadb',
+        'container' => [
+            'set' => [
+                Psr\Log\LoggerInterface::class => function() {
+                    $logFilePath = __DIR__ . '/logs/dbadmin';
+                    return new Lagdo\DbAdmin\Demo\Log\Logger($logFilePath);
+                },
+            ],
+        ],
+        'packages' => [
+            Lagdo\DbAdmin\DbAdminPackage::class => [
+                'provider' => function(array $options) {
+                    $cfgFilePath = __DIR__ . '/config.php';
+                    $reader = jaxon()->di()->g(UserFileReader::class);
+                    return $reader->getOptions($cfgFilePath, $options);
+                },
+                'access' => [
+                    'server' => false,
+                    'system' => false,
+                ],
+                'logging' => [
+                    'options' => [
+                        'library' => [
+                            'enabled' => false,
+                        ],
+                        'enduser' => [
+                            'enabled' => true,
+                        ],
+                        'history' => [
+                            'enabled' => true,
+                            'distinct' => true,
+                            'limit' => 10,
+                        ],
+                    ],
+                    'database' => [
+                        // Same as the "servers" items, but "name" is the database name.
+                        'driver' => 'sqlite',
+                        'directory' => '/var/lib/sqlite/3',
+                        'name' => 'chinook.db',
+                    ],
+                ],
+            ],
+        ],
+        'dialogs' => [
+            'default' => [
+                'modal' => 'bootbox',
+                'alert' => 'toastr',
+                'confirm' => 'noty',
+            ],
+        ],
     ],
-    'fallback' => [
-        'servers' => [
-            // The database servers
-            'db-postgresql' => [ // A unique identifier for this server
-                'driver' => 'pgsql',
-                'name' => 'PostgreSQL 14',     // The name to be displayed in the dashboard UI.
-                'host' => 'db-postgresql',     // The database host name or address.
-                'port' => 5432,      // The database port. Optional.
-                'username' => 'postgres', // The database user credentials.
-                'password' => 'dbadmin', // The database user credentials.
+    'lib' => [
+        'core' => [
+            'debug' => [
+                'on' => false,
             ],
-            'db-mariadb' => [ // A unique identifier for this server
-                'driver' => 'mysql',
-                'name' => 'MariaDB 10',     // The name to be displayed in the dashboard UI.
-                'host' => 'db-mariadb',     // The database host name or address.
-                'port' => 3306,      // The database port. Optional.
-                'username' => 'root', // The database user credentials.
-                'password' => 'dbadmin', // The database user credentials.
+            'request' => [
+                'uri' => 'ajax.php',
             ],
-            'db-mysql' => [ // A unique identifier for this server
-                'driver' => 'mysql',
-                'name' => 'MySQL 8',     // The name to be displayed in the dashboard UI.
-                'host' => 'db-mysql',     // The database host name or address.
-                'port' => 3306,      // The database port. Optional.
-                'username' => 'root', // The database user credentials.
-                'password' => 'dbadmin', // The database user credentials.
+            'prefix' => [
+                'class' => '',
             ],
-            'sqlite-3' => [ // A unique identifier for this server/var/www
-                'driver' => 'sqlite',
-                'name' => 'Sqlite 3',     // The name to be displayed in the dashboard UI.
-                'directory' => '/var/lib/sqlite/3', // The directory containing the database files.
+        ],
+        'js' => [
+            'lib' => [
+                // 'uri' => '',
+            ],
+            'app' => [
+                'export' => false,
+                'minify' => false,
+                'uri' => '/jaxon',
+                'dir' => __DIR__ . '/public/jaxon',
+                // 'file' => '',
             ],
         ],
     ],
