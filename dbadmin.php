@@ -13,6 +13,17 @@ return [
                     $logFilePath = __DIR__ . '/logs/dbadmin';
                     return new Lagdo\DbAdmin\Demo\Log\Logger($logFilePath);
                 },
+                Lagdo\DbAdmin\Config\AuthInterface::class => fn() =>
+                    new class implements Lagdo\DbAdmin\Config\AuthInterface {
+                        public function user(): string
+                        {
+                            return 'admin@company.com';
+                        }
+                        public function role(): string
+                        {
+                            return '';
+                        }
+                    },
             ],
         ],
         'packages' => [
