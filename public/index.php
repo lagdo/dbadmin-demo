@@ -1,92 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Jaxon DbAdmin Demo</title>
-    <link href="sb-admin/dist/css/styles.css" rel="stylesheet" />
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <style>
-      html {
-        font-size: 14px;
-      }
-      .row {
-        margin-bottom: 10px;
-      }
-      .sb-sidenav-menu {
-        padding-top: 20px;
-        padding-left: 7px;
-      }
-      .sb-sidenav-menu > .row {
-        margin-right: 0px;
-      }
-    </style>
 <?php
-require __DIR__ . '/../jaxon.php';
 
-use Lagdo\DbAdmin\Ajax\App\Sidebar;
-use Lagdo\DbAdmin\Ajax\App\Wrapper;
+use Lagdo\Facades\Logger;
 
-use function Jaxon\attr;
-use function Jaxon\cl;
-use function Jaxon\rq;
+require dirname(__DIR__) . '/config/jaxon.php';
 
-$jaxon = Jaxon\jaxon();
-echo $jaxon->getCss(), "\n";
-?>
-  </head>
-  <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-primary">
-      <!-- Navbar Brand-->
-      <a class="navbar-brand ps-3" href="index.html">Jaxon DbAdmin Demo</a>
-      <!-- Sidebar Toggle-->
-      <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-    </nav>
-
-    <div id="layoutSidenav">
-      <div id="layoutSidenav_nav">
-        <nav class="sb-sidenav accordion" id="sidenavAccordion">
-          <div class="sb-sidenav-menu" <?php echo attr()->bind(rq(Sidebar::class)) ?>>
-            <?php echo cl(Sidebar::class)->html() ?>
-          </div>
-        </nav>
-      </div>
-
-      <div id="layoutSidenav_content">
-        <main id="jaxon-dbadmin">
-          <div class="container-fluid" <?php echo attr()->bind(rq(Wrapper::class)) ?>>
-            <?php echo cl(Wrapper::class)->html() ?>
-          </div>
-        </main>
-        <footer class="py-4 bg-light mt-auto">
-          <div class="container-fluid px-4">
-            <div class="d-flex align-items-center justify-content-between small">
-              <div class="text-muted">Copyright &copy; Your Website 2023</div>
-              <div>
-                <a href="#">Privacy Policy</a>
-                &middot;
-                <a href="#">Terms &amp; Conditions</a>
-              </div>
-            </div>
-          </div>
-        </footer>
-      </div>
-    </div>
-  </body>
-
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-  <script src="sb-admin/dist/js/scripts.js"></script>
-<?php
-echo $jaxon->getJs(), "\n", $jaxon->getScript(), "\n";
-$readyScript = attr()->package(Lagdo\DbAdmin\DbAdminPackage::class, 'ready');
-?>
-<?php if($readyScript !== ''): ?>
-<script type='text/javascript'>
-  <?= $readyScript ?>;
-</script>
-<?php endif ?>
-</html>
+// Show the index page.
+Logger::debug('Render template', ['page' => page()]);
+echo jaxon()->view()->render('tpl::' . page());

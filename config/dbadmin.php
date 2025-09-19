@@ -2,22 +2,31 @@
 
 use Lagdo\DbAdmin\Config\UserFileReader;
 
+$appDir = dirname(__DIR__);
+
 return [
     'app' => [
         'ui' => [
             'template' => 'bootstrap5',
         ],
+        'views' => [
+            'tpl' => [
+                'directory' => "$appDir/views",
+                'extension' => '.php',
+                'renderer' => 'jaxon',
+            ],
+        ],
         'container' => [
             'set' => [
-                Psr\Log\LoggerInterface::class => function() {
-                    $logFilePath = __DIR__ . '/logs/dbadmin';
+                Psr\Log\LoggerInterface::class => function() use($appDir) {
+                    $logFilePath = "$appDir/logs/dbadmin";
                     return new Lagdo\DbAdmin\Demo\Log\Logger($logFilePath);
                 },
                 Lagdo\DbAdmin\Config\AuthInterface::class => fn() =>
                     new class implements Lagdo\DbAdmin\Config\AuthInterface {
                         public function user(): string
                         {
-                            return 'admin@company.com';
+                            return '';
                         }
                         public function role(): string
                         {
@@ -88,7 +97,7 @@ return [
                 'export' => false,
                 'minify' => false,
                 'uri' => '/jaxon',
-                'dir' => __DIR__ . '/public/jaxon',
+                'dir' => "$appDir/public/jaxon",
                 // 'file' => '',
             ],
         ],

@@ -5,7 +5,12 @@ use Lagdo\DbAdmin\Ajax\AppException;
 use Lagdo\Facades\ContainerWrapper;
 use Psr\Container\ContainerInterface;
 
-require(__DIR__ . '/../vendor/autoload.php');
+function page(): string
+{
+    return ($_GET['page'] ?? '') === 'log' ? 'logging' : 'dbadmin';
+}
+
+require dirname(__DIR__, 2) . '/vendor/autoload.php';
 
 ContainerWrapper::setContainer(new class implements ContainerInterface
     {
@@ -26,5 +31,8 @@ $alert = jaxon()->getResponse()->dialog;
 $callback = fn(AppException $e) => $alert->title('Warning')->warning($e->getMessage());
 jaxon()->callback()->error($callback, AppException::class);
 
-jaxon()->di()->val('jaxon_annotations_cache_dir', '/var/cache/jaxon');
-jaxon()->app()->setup(__DIR__ . '/dbadmin.php');
+$appDir = dirname(__DIR__);
+$page = page();
+
+jaxon()->di()->val('jaxon_annotations_cache_dir', "$appDir/cache/$page");
+jaxon()->app()->setup(__DIR__ . "/$page.php");
