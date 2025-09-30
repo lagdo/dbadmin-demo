@@ -59,6 +59,10 @@ return [
                             'distinct' => true,
                             'limit' => 10,
                         ],
+                        'favorite' => [
+                            'enabled' => true,
+                            'limit' => 10,
+                        ],
                     ],
                     'database' => [
                         // Same as the "servers" items, but "name" is the database name.
