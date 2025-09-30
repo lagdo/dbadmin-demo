@@ -1,7 +1,8 @@
 <?php
 
 use Jaxon\App\Dialog\AlertInterface;
-use Lagdo\DbAdmin\Ajax\AppException;
+use Lagdo\DbAdmin\Ajax\Exception\AppException;
+use Lagdo\DbAdmin\Ajax\Exception\ValidationException;
 use Lagdo\Facades\ContainerWrapper;
 use Psr\Container\ContainerInterface;
 
@@ -28,8 +29,10 @@ ContainerWrapper::setContainer(new class implements ContainerInterface
 
 /** @var AlertInterface */
 $alert = jaxon()->getResponse()->dialog;
-$callback = fn(AppException $e) => $alert->title('Warning')->warning($e->getMessage());
-jaxon()->callback()->error($callback, AppException::class);
+jaxon()->callback()->error(fn(AppException $e) => $alert->title('Warning')
+    ->warning($e->getMessage()), AppException::class);
+jaxon()->callback()->error(fn(ValidationException $e) => $alert->title('Error')
+    ->error($e->getMessage()), ValidationException::class);
 
 $appDir = dirname(__DIR__);
 $page = page();
