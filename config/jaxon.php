@@ -13,7 +13,8 @@ function page(): string
 
 require dirname(__DIR__, 2) . '/vendor/autoload.php';
 
-ContainerWrapper::setContainer(new class implements ContainerInterface
+ContainerWrapper::setContainer(
+    new class implements ContainerInterface
     {
         public function get($id)
         {
@@ -37,5 +38,5 @@ jaxon()->callback()->error(fn(ValidationException $e) => $alert->title('Error')
 $appDir = dirname(__DIR__);
 $page = page();
 
-jaxon()->di()->val('jaxon_annotations_cache_dir', "$appDir/cache/$page");
+jaxon()->di()->val('jaxon_annotations_cache_dir', "$appDir/cache/$page/annotations");
 jaxon()->app()->setup(__DIR__ . "/$page.php");

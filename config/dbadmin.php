@@ -6,6 +6,12 @@ $appDir = dirname(__DIR__);
 
 return [
     'app' => [
+        'metadata' => [
+            'cache' => [
+                'enabled' => true,
+                'dir' => "$appDir/cache/dbadmin/attributes",
+            ],
+        ],
         'ui' => [
             'template' => 'bootstrap5',
         ],
