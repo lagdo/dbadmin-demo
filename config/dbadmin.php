@@ -8,7 +8,7 @@ return [
     'app' => [
         'metadata' => [
             'cache' => [
-                'enabled' => true,
+                'enabled' => false,
                 'dir' => "$appDir/cache/dbadmin/attributes",
             ],
         ],

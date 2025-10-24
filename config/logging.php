@@ -4,6 +4,12 @@ $appDir = dirname(__DIR__);
 
 return [
     'app' => [
+        'metadata' => [
+            'cache' => [
+                'enabled' => false,
+                'dir' => "$appDir/cache/logging/attributes",
+            ],
+        ],
         'ui' => [
             'template' => 'bootstrap5',
         ],
