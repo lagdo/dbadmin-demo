@@ -24,10 +24,8 @@ return [
         ],
         'container' => [
             'set' => [
-                Psr\Log\LoggerInterface::class => function() use($appDir) {
-                    $logFilePath = "$appDir/logs/dbadmin";
-                    return new Lagdo\DbAdmin\Demo\Log\Logger($logFilePath);
-                },
+                Psr\Log\LoggerInterface::class => fn() =>
+                    new Lagdo\DbAdmin\Demo\Log\Logger("$appDir/logs/dbadmin"),
                 Lagdo\DbAdmin\Config\AuthInterface::class => fn() =>
                     new class implements Lagdo\DbAdmin\Config\AuthInterface {
                         public function user(): string
