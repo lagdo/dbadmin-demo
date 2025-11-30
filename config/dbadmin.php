@@ -46,6 +46,17 @@ return [
                     $reader = jaxon()->di()->g(UserFileReader::class);
                     return $reader->getOptions($cfgFilePath, $options);
                 },
+                'export' => [
+                    'writer' => fn(string $content, string $filename): bool|int =>
+                        @file_put_contents("$appDir/exports/user/$filename", "$content\n"),
+                    'reader' => function(string $filename) use($appDir): string {
+                        $exportDir = "$appDir/exports/user";
+                        $filepath = "$exportDir/$filename";
+                        return !is_dir($exportDir) || !is_file($filepath) ?
+                            "No file $filepath found." : file_get_contents($filepath);
+                    },
+                    'url' => fn(string $filename): string => "/export.php?file=$filename",
+                ],
                 'access' => [
                     'server' => false,
                     'system' => false,

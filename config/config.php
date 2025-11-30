@@ -1,7 +1,5 @@
 <?php
 
-$appDir = dirname(__DIR__);
-
 return [
     'common' => [
         'access' => [

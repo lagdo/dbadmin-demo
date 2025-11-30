@@ -38,5 +38,4 @@ jaxon()->callback()->error(fn(ValidationException $e) => $alert->title('Error')
 $appDir = dirname(__DIR__);
 $page = page();
 
-jaxon()->di()->val('jaxon_annotations_cache_dir', "$appDir/cache/$page/annotations");
 jaxon()->app()->setup(__DIR__ . "/$page.php");
