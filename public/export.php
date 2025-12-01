@@ -7,9 +7,5 @@ header('Content-Type: text/plain');
 
 $package = jaxon()->package(Lagdo\DbAdmin\DbAdminPackage::class);
 $reader = $package->getOption('export.reader');
-if (!is_callable($reader)) {
-    echo "No export reader set.";
-    exit;
-}
 
-echo $reader($_GET['file'] ?? '');
+echo !is_callable($reader) ? "No export reader set." : $reader($_GET['file'] ?? '');

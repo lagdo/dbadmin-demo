@@ -3,6 +3,7 @@
 use Lagdo\DbAdmin\Config\UserFileReader;
 
 $appDir = dirname(__DIR__);
+$getExportPath = fn(string $filename): string => "$appDir/exports/user/$filename";
 
 return [
     'app' => [
@@ -47,15 +48,16 @@ return [
                     return $reader->getOptions($cfgFilePath, $options);
                 },
                 'export' => [
-                    'writer' => fn(string $content, string $filename): bool|int =>
-                        @file_put_contents("$appDir/exports/user/$filename", "$content\n"),
-                    'reader' => function(string $filename) use($appDir): string {
-                        $exportDir = "$appDir/exports/user";
-                        $filepath = "$exportDir/$filename";
-                        return !is_dir($exportDir) || !is_file($filepath) ?
-                            "No file $filepath found." : file_get_contents($filepath);
+                    'writer' => function(string $content, string $filename) use($getExportPath): string {
+                        $filepath = $getExportPath($filename);
+                        return !@file_put_contents($filepath, "$content\n") ?
+                            '' : "/export.php?file=$filename";
                     },
-                    'url' => fn(string $filename): string => "/export.php?file=$filename",
+                    'reader' => function(string $filename) use($getExportPath): string {
+                        $filepath = $getExportPath($filename);
+                        return !is_file($filepath) ? "No file $filepath found." :
+                            file_get_contents($filepath);
+                    },
                 ],
                 'access' => [
                     'server' => false,
