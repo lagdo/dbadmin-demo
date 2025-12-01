@@ -3,6 +3,7 @@ composer.lock
 /vendor/
 /build/
 /public/jaxon/
-/exports/user/
 /.idea/
 /logs/*log
+/exports/
+/uploads/

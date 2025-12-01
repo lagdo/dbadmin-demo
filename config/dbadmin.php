@@ -122,5 +122,13 @@ return [
                 // 'file' => '',
             ],
         ],
+        'upload' => [
+            'enabled' => true,
+            'files' => [
+                'sql_files' => [
+                    'dir' => "$appDir/uploads",
+                ],
+            ],
+        ],
     ],
 ];

@@ -153,7 +153,7 @@ class Logger implements LoggerInterface
                 $line = $trace['line'] ?? '?';
                 $function = $trace['function'];
                 $class = $trace['class'] ?? '';
-                return "$file:$line - {$class}{$function}()";
+                return "$file:$line - {$class}::{$function}()";
             },
             $backtrace
         );
