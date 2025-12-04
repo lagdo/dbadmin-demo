@@ -1,9 +1,24 @@
 <?php
 
+use Jaxon\Storage\StorageManager;
 use Lagdo\DbAdmin\Config\UserFileReader;
+use League\Flysystem\Filesystem;
+use League\Flysystem\FilesystemException;
+use League\Flysystem\UnableToReadFile;
+use League\Flysystem\UnableToWriteFile;
 
 $appDir = dirname(__DIR__);
-$getExportPath = fn(string $filename): string => "$appDir/exports/user/$filename";
+
+function getExportStorage(): Filesystem
+{
+    // Make a Filesystem object with the storage.exports options.
+    return jaxon()->di()->g(StorageManager::class)->get('exports');
+}
+
+function getExportPath(string $filename): string
+{
+    return "users/$filename";
+}
 
 return [
     'app' => [
@@ -40,6 +55,31 @@ return [
                     },
             ],
         ],
+        'dialogs' => [
+            'default' => [
+                'modal' => 'bootbox',
+                'alert' => 'toastr',
+                'confirm' => 'noty',
+            ],
+        ],
+        'storage' => [
+            'uploads' => [
+                'adapter' => 'local',
+                'dir' => "$appDir/uploads",
+            ],
+            'exports' => [
+                'adapter' => 'local',
+                'dir' => "$appDir/exports",
+            ],
+        ],
+        'upload' => [
+            'enabled' => true,
+            'files' => [
+                'sql_files' => [
+                    'storage' => 'uploads',
+                ],
+            ],
+        ],
         'packages' => [
             Lagdo\DbAdmin\DbAdminPackage::class => [
                 'provider' => function(array $options) {
@@ -47,21 +87,31 @@ return [
                     $reader = jaxon()->di()->g(UserFileReader::class);
                     return $reader->getOptions($cfgFilePath, $options);
                 },
-                'export' => [
-                    'writer' => function(string $content, string $filename) use($getExportPath): string {
-                        $filepath = $getExportPath($filename);
-                        return !@file_put_contents($filepath, "$content\n") ?
-                            '' : "/export.php?file=$filename";
-                    },
-                    'reader' => function(string $filename) use($getExportPath): string {
-                        $filepath = $getExportPath($filename);
-                        return !is_file($filepath) ? "No file $filepath found." :
-                            file_get_contents($filepath);
-                    },
-                ],
                 'access' => [
                     'server' => false,
                     'system' => false,
+                ],
+                'export' => [
+                    'writer' => function(string $content, string $filename): string {
+                        try {
+                            $storage = getExportStorage();
+                            $storage->write(getExportPath($filename), "$content\n");
+                        } catch (FilesystemException|UnableToWriteFile) {
+                            return '';
+                        }
+                        // Return the link to the exported file.
+                        return "/export.php?file=$filename";
+                    },
+                    'reader' => function(string $filename): string {
+                        try {
+                            $storage = getExportStorage();
+                            $filepath = getExportPath($filename);
+                            return !$storage->fileExists($filepath) ?
+                                "No file $filename found." : $storage->read($filepath);
+                        } catch (FilesystemException|UnableToReadFile) {
+                            return "No file $filename found.";
+                        }
+                    },
                 ],
                 'logging' => [
                     'options' => [
@@ -90,13 +140,6 @@ return [
                 ],
             ],
         ],
-        'dialogs' => [
-            'default' => [
-                'modal' => 'bootbox',
-                'alert' => 'toastr',
-                'confirm' => 'noty',
-            ],
-        ],
     ],
     'lib' => [
         'core' => [
@@ -120,14 +163,6 @@ return [
                 'uri' => '/jaxon',
                 'dir' => "$appDir/public/jaxon",
                 // 'file' => '',
-            ],
-        ],
-        'upload' => [
-            'enabled' => true,
-            'files' => [
-                'sql_files' => [
-                    'dir' => "$appDir/uploads",
-                ],
             ],
         ],
     ],
