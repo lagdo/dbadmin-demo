@@ -29,7 +29,7 @@ return [
             ],
         ],
         'packages' => [
-            Lagdo\DbAdmin\LoggingPackage::class => [
+            Lagdo\DbAdmin\Db\LoggingPackage::class => [
                 'database' => [
                     // Same as the "servers" items, but "name" is the database name.
                     'driver' => 'sqlite',

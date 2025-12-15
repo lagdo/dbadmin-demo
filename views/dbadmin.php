@@ -3,7 +3,7 @@
 <?php
 use Lagdo\DbAdmin\Ajax\App\Sidebar;
 use Lagdo\DbAdmin\Ajax\App\Wrapper;
-use Lagdo\DbAdmin\DbAdminPackage;
+use Lagdo\DbAdmin\Db\DbAdminPackage;
 
 use function Jaxon\attr;
 use function Jaxon\cl;

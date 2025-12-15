@@ -1,7 +1,8 @@
 <?php
 
 use Jaxon\Storage\StorageManager;
-use Lagdo\DbAdmin\Config\UserFileReader;
+use Lagdo\DbAdmin\Db\Config\UserFileReader;
+use Lagdo\DbAdmin\Demo\Log\Logger;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\UnableToReadFile;
@@ -40,10 +41,9 @@ return [
         ],
         'container' => [
             'set' => [
-                Psr\Log\LoggerInterface::class => fn() =>
-                    new Lagdo\DbAdmin\Demo\Log\Logger("$appDir/logs/dbadmin"),
-                Lagdo\DbAdmin\Config\AuthInterface::class => fn() =>
-                    new class implements Lagdo\DbAdmin\Config\AuthInterface {
+                Psr\Log\LoggerInterface::class => fn() => new Logger("$appDir/logs/dbadmin"),
+                Lagdo\DbAdmin\Db\Config\AuthInterface::class => fn() =>
+                    new class implements Lagdo\DbAdmin\Db\Config\AuthInterface {
                         public function user(): string
                         {
                             return '';
@@ -81,7 +81,7 @@ return [
             ],
         ],
         'packages' => [
-            Lagdo\DbAdmin\DbAdminPackage::class => [
+            Lagdo\DbAdmin\Db\DbAdminPackage::class => [
                 'provider' => function(array $options) {
                     $cfgFilePath = __DIR__ . '/config.php';
                     $reader = jaxon()->di()->g(UserFileReader::class);
