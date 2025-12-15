@@ -8,7 +8,7 @@ use Psr\Container\ContainerInterface;
 
 function page(): string
 {
-    return ($_GET['page'] ?? '') === 'log' ? 'logging' : 'dbadmin';
+    return ($_GET['page'] ?? '') === 'audit' ? 'dbaudit' : 'dbadmin';
 }
 
 require dirname(__DIR__, 2) . '/vendor/autoload.php';

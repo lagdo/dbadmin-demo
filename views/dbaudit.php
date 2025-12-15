@@ -1,9 +1,9 @@
 <?php $this->extends('tpl::layout') ?>
 
 <?php
-use Lagdo\DbAdmin\Ajax\Log\Sidebar;
-use Lagdo\DbAdmin\Ajax\Log\Wrapper;
-use Lagdo\DbAdmin\Db\LoggingPackage;
+use Lagdo\DbAdmin\Ajax\Audit\Sidebar;
+use Lagdo\DbAdmin\Ajax\Audit\Wrapper;
+use Lagdo\DbAdmin\Db\DbAuditPackage;
 
 use function Jaxon\attr;
 use function Jaxon\cl;
@@ -30,7 +30,7 @@ echo $jaxon->getCss(), "\n";
 <?php $this->block('footer') ?>
 <?php
 echo $jaxon->getJs(), "\n", $jaxon->getScript(), "\n";
-$readyScript = attr()->package(LoggingPackage::class, 'ready');
+$readyScript = attr()->package(DbAuditPackage::class, 'ready');
 ?>
 <?php if($readyScript !== ''): ?>
 <script type='text/javascript'>

@@ -1,5 +1,7 @@
 <?php
 
+use Lagdo\DbAdmin\Demo\Log\Logger;
+
 $appDir = dirname(__DIR__);
 
 return [
@@ -7,7 +9,7 @@ return [
         'metadata' => [
             'cache' => [
                 'enabled' => false,
-                'dir' => "$appDir/cache/logging/attributes",
+                'dir' => "$appDir/cache/dbaudit/attributes",
             ],
         ],
         'ui' => [
@@ -22,14 +24,11 @@ return [
         ],
         'container' => [
             'set' => [
-                Psr\Log\LoggerInterface::class => function() use($appDir) {
-                    $logFilePath = "$appDir/logs/dbadmin";
-                    return new Lagdo\DbAdmin\Demo\Log\Logger($logFilePath);
-                },
+                Psr\Log\LoggerInterface::class => fn() => new Logger("$appDir/logs/dbaudit"),
             ],
         ],
         'packages' => [
-            Lagdo\DbAdmin\Db\LoggingPackage::class => [
+            Lagdo\DbAdmin\Db\DbAuditPackage::class => [
                 'database' => [
                     // Same as the "servers" items, but "name" is the database name.
                     'driver' => 'sqlite',
@@ -52,7 +51,7 @@ return [
                 'on' => false,
             ],
             'request' => [
-                'uri' => 'ajax.php?page=log',
+                'uri' => 'ajax.php?page=audit',
             ],
             'prefix' => [
                 'class' => '',
