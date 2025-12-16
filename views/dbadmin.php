@@ -1,8 +1,8 @@
 <?php $this->extends('tpl::layout') ?>
 
 <?php
-use Lagdo\DbAdmin\Ajax\App\Sidebar;
-use Lagdo\DbAdmin\Ajax\App\Wrapper;
+use Lagdo\DbAdmin\Ajax\Admin\Sidebar;
+use Lagdo\DbAdmin\Ajax\Admin\Wrapper;
 use Lagdo\DbAdmin\Db\DbAdminPackage;
 
 use function Jaxon\attr;

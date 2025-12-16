@@ -1,6 +1,8 @@
 <?php
 
+use Lagdo\DbAdmin\Db\DbAuditPackage;
 use Lagdo\DbAdmin\Demo\Log\Logger;
+use Psr\Log\LoggerInterface;
 
 $appDir = dirname(__DIR__);
 
@@ -24,11 +26,11 @@ return [
         ],
         'container' => [
             'set' => [
-                Psr\Log\LoggerInterface::class => fn() => new Logger("$appDir/logs/dbaudit"),
+                LoggerInterface::class => fn() => new Logger("$appDir/logs/dbaudit"),
             ],
         ],
         'packages' => [
-            Lagdo\DbAdmin\Db\DbAuditPackage::class => [
+            DbAuditPackage::class => [
                 'database' => [
                     // Same as the "servers" items, but "name" is the database name.
                     'driver' => 'sqlite',

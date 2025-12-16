@@ -1,12 +1,15 @@
 <?php
 
 use Jaxon\Storage\StorageManager;
+use Lagdo\DbAdmin\Db\Config\AuthInterface;
 use Lagdo\DbAdmin\Db\Config\UserFileReader;
+use Lagdo\DbAdmin\Db\DbAdminPackage;
 use Lagdo\DbAdmin\Demo\Log\Logger;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\UnableToReadFile;
 use League\Flysystem\UnableToWriteFile;
+use Psr\Log\LoggerInterface;
 
 $appDir = dirname(__DIR__);
 
@@ -41,18 +44,17 @@ return [
         ],
         'container' => [
             'set' => [
-                Psr\Log\LoggerInterface::class => fn() => new Logger("$appDir/logs/dbadmin"),
-                Lagdo\DbAdmin\Db\Config\AuthInterface::class => fn() =>
-                    new class implements Lagdo\DbAdmin\Db\Config\AuthInterface {
-                        public function user(): string
-                        {
-                            return '';
-                        }
-                        public function role(): string
-                        {
-                            return '';
-                        }
-                    },
+                LoggerInterface::class => fn() => new Logger("$appDir/logs/dbadmin"),
+                AuthInterface::class => fn() => new class implements AuthInterface {
+                    public function user(): string
+                    {
+                        return '';
+                    }
+                    public function role(): string
+                    {
+                        return '';
+                    }
+                },
             ],
         ],
         'dialogs' => [
@@ -81,7 +83,7 @@ return [
             ],
         ],
         'packages' => [
-            Lagdo\DbAdmin\Db\DbAdminPackage::class => [
+            DbAdminPackage::class => [
                 'provider' => function(array $options) {
                     $cfgFilePath = __DIR__ . '/config.php';
                     $reader = jaxon()->di()->g(UserFileReader::class);
@@ -113,7 +115,7 @@ return [
                         }
                     },
                 ],
-                'logging' => [
+                'audit' => [
                     'options' => [
                         'library' => [
                             'enabled' => false,
