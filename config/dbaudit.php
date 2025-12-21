@@ -61,7 +61,7 @@ return [
         ],
         'js' => [
             'lib' => [
-                // 'uri' => '',
+                'uri' => 'https://cdn.jsdelivr.net/gh/jaxon-php/jaxon-js@5.1.0/dist',
             ],
             'app' => [
                 'export' => false,
