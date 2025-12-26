@@ -16,10 +16,12 @@
         "source": "https://github.com/lagdo/dbadmin-demo"
     },
     "require": {
-        "php": ">=7.1.0",
+        "php": ">=8.1.0",
         "lagdo/dbadmin-driver-pgsql": "^0.14",
         "lagdo/dbadmin-driver-mysql": "^0.14",
         "lagdo/dbadmin-driver-sqlite": "^0.14",
+        "lagdo/jaxon-dbadmin": "^0.24",
+        "lagdo/ui-builder": "^0.2",
         "lagdo/ui-builder-bootstrap5": "^0.1"
     },
     "autoload": {
