@@ -29,6 +29,13 @@ return [
                 LoggerInterface::class => fn() => new Logger("$appDir/logs/dbaudit"),
             ],
         ],
+        'assets' => [
+            'export' => true,
+            'minify' => true,
+            'uri' => '/jaxon/audit',
+            'dir' => "$appDir/public/jaxon/audit",
+            // 'file' => '',
+        ],
         'packages' => [
             DbAuditPackage::class => [
                 'database' => [
@@ -62,13 +69,6 @@ return [
         'js' => [
             'lib' => [
                 'uri' => 'https://cdn.jsdelivr.net/gh/jaxon-php/jaxon-js@5.1.0/dist',
-            ],
-            'app' => [
-                'export' => false,
-                'minify' => false,
-                'uri' => '/jaxon',
-                'dir' => "$appDir/public/jaxon",
-                // 'file' => '',
             ],
         ],
     ],

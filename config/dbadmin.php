@@ -58,6 +58,13 @@ return [
                 },
             ],
         ],
+        'assets' => [
+            'export' => true,
+            'minify' => true,
+            'uri' => '/jaxon/admin',
+            'dir' => "$appDir/public/jaxon/admin",
+            // 'file' => '',
+        ],
         'dialogs' => [
             'default' => [
                 'modal' => 'bootbox',
@@ -159,13 +166,6 @@ return [
         'js' => [
             'lib' => [
                 'uri' => 'https://cdn.jsdelivr.net/gh/jaxon-php/jaxon-js@5.1.0/dist',
-            ],
-            'app' => [
-                'export' => false,
-                'minify' => false,
-                'uri' => '/jaxon',
-                'dir' => "$appDir/public/jaxon",
-                // 'file' => '',
             ],
         ],
     ],

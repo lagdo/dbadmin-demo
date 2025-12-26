@@ -3,8 +3,6 @@
 use Jaxon\App\Dialog\AlertInterface;
 use Lagdo\DbAdmin\Ajax\Exception\AppException;
 use Lagdo\DbAdmin\Ajax\Exception\ValidationException;
-use Lagdo\Facades\ContainerWrapper;
-use Psr\Container\ContainerInterface;
 
 function page(): string
 {
@@ -12,21 +10,6 @@ function page(): string
 }
 
 require dirname(__DIR__, 2) . '/vendor/autoload.php';
-
-ContainerWrapper::setContainer(
-    new class implements ContainerInterface
-    {
-        public function get($id)
-        {
-            return jaxon()->di()->g($id);
-        }
-
-        public function has($id): bool
-        {
-            return jaxon()->di()->h($id);
-        }
-    }
-);
 
 /** @var AlertInterface */
 $alert = jaxon()->getResponse()->dialog;
