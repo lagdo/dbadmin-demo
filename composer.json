@@ -21,8 +21,7 @@
         "lagdo/dbadmin-driver-mysql": "0.20.*",
         "lagdo/dbadmin-driver-sqlite": "0.20.*",
         "lagdo/jaxon-dbadmin": "0.25.*",
-        "lagdo/ui-builder": "^0.2",
-        "lagdo/ui-builder-bootstrap5": "^0.1"
+        "lagdo/ui-builder-bootstrap5": "0.2.*"
     },
     "autoload": {
         "psr-4": {
