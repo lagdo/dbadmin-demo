@@ -12,11 +12,13 @@ function page(): string
 require dirname(__DIR__, 2) . '/vendor/autoload.php';
 
 /** @var AlertInterface */
-$alert = jaxon()->getResponse()->dialog;
-jaxon()->callback()->error(fn(AppException $e) => $alert->title('Warning')
-    ->warning($e->getMessage()), AppException::class);
-jaxon()->callback()->error(fn(ValidationException $e) => $alert->title('Error')
-    ->error($e->getMessage()), ValidationException::class);
+$dialog = jaxon()->getResponse()->dialog;
+$warningHandler = fn(Exception $e) => $dialog->title('Warning')->warning($e->getMessage());
+$errorHandler = fn(Exception $e) => $dialog->title('Error')->error($e->getMessage());
+
+jaxon()->callback()->error($warningHandler, AppException::class);
+jaxon()->callback()->error($errorHandler, ValidationException::class);
+jaxon()->callback()->error($errorHandler);
 
 $appDir = dirname(__DIR__);
 $page = page();

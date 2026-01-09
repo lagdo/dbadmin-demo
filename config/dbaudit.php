@@ -30,8 +30,8 @@ return [
             ],
         ],
         'assets' => [
-            'export' => true,
-            'minify' => true,
+            'export' => false,
+            'minify' => false,
             'uri' => '/jaxon/audit',
             'dir' => "$appDir/public/jaxon/audit",
             // 'file' => '',
@@ -49,8 +49,8 @@ return [
         'dialogs' => [
             'default' => [
                 'modal' => 'bootbox',
-                'alert' => 'toastr',
-                'confirm' => 'noty',
+                'alert' => 'sweetalert',
+                'confirm' => 'sweetalert',
             ],
         ],
     ],

@@ -10,7 +10,7 @@ use League\Flysystem\UnableToReadFile;
 use League\Flysystem\UnableToWriteFile;
 use Psr\Log\LoggerInterface;
 
-use function Jaxon\Storage\storage;
+use function Jaxon\storage;
 
 $appDir = dirname(__DIR__);
 
@@ -59,8 +59,8 @@ return [
             ],
         ],
         'assets' => [
-            'export' => true,
-            'minify' => true,
+            'export' => false,
+            'minify' => false,
             'uri' => '/jaxon/admin',
             'dir' => "$appDir/public/jaxon/admin",
             // 'file' => '',
@@ -68,18 +68,20 @@ return [
         'dialogs' => [
             'default' => [
                 'modal' => 'bootbox',
-                'alert' => 'toastr',
-                'confirm' => 'noty',
+                'alert' => 'sweetalert',
+                'confirm' => 'sweetalert',
             ],
         ],
         'storage' => [
-            'uploads' => [
-                'adapter' => 'local',
-                'dir' => "$appDir/uploads",
-            ],
-            'exports' => [
-                'adapter' => 'local',
-                'dir' => "$appDir/exports",
+            'stores' => [
+                'uploads' => [
+                    'adapter' => 'local',
+                    'dir' => "$appDir/uploads",
+                ],
+                'exports' => [
+                    'adapter' => 'local',
+                    'dir' => "$appDir/exports",
+                ],
             ],
         ],
         'upload' => [
