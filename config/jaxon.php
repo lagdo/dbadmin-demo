@@ -1,6 +1,5 @@
 <?php
 
-use Jaxon\App\Dialog\AlertInterface;
 use Lagdo\DbAdmin\Ajax\Exception\AppException;
 use Lagdo\DbAdmin\Ajax\Exception\ValidationException;
 
@@ -11,8 +10,7 @@ function page(): string
 
 require dirname(__DIR__, 2) . '/vendor/autoload.php';
 
-/** @var AlertInterface */
-$dialog = jaxon()->getResponse()->dialog;
+$dialog = jaxon()->getResponse()->dialog();
 $warningHandler = fn(Exception $e) => $dialog->title('Warning')->warning($e->getMessage());
 $errorHandler = fn(Exception $e) => $dialog->title('Error')->error($e->getMessage());
 
