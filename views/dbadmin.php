@@ -1,13 +1,9 @@
 <?php $this->extends('tpl::layout') ?>
 
 <?php
-use Lagdo\DbAdmin\Ajax\Admin\Sidebar;
-use Lagdo\DbAdmin\Ajax\Admin\Wrapper;
 use Lagdo\DbAdmin\Db\DbAdminPackage;
 
 use function Jaxon\attr;
-use function Jaxon\cl;
-use function Jaxon\rq;
 
 $jaxon = Jaxon\jaxon();
 ?>
@@ -43,16 +39,16 @@ $readyScript = attr()->package(DbAdminPackage::class, 'ready');
     <div id="layoutSidenav">
       <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion" id="sidenavAccordion">
-          <div class="sb-sidenav-menu" <?php echo attr()->bind(rq(Sidebar::class)) ?>>
-            <?php echo cl(Sidebar::class)->html() ?>
+          <div class="sb-sidenav-menu">
+            <?php echo $jaxon->package(DbAdminPackage::class)->sidebar() ?>
           </div>
         </nav>
       </div>
 
       <div id="layoutSidenav_content">
         <main id="jaxon-dbadmin">
-          <div class="container-fluid" <?php echo attr()->bind(rq(Wrapper::class)) ?>>
-            <?php echo cl(Wrapper::class)->html() ?>
+          <div class="container-fluid">
+            <?php echo $jaxon->package(DbAdminPackage::class)->wrapper() ?>
           </div>
         </main>
         <footer class="py-4 bg-light mt-auto">
