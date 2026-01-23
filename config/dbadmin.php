@@ -49,11 +49,11 @@ return [
                 AuthInterface::class => fn() => new class implements AuthInterface {
                     public function user(): string
                     {
-                        return '';
+                        return getenv('DBADMIN_USER') ?: '';
                     }
                     public function role(): string
                     {
-                        return '';
+                        return getenv('DBADMIN_ROLE') ?: '';
                     }
                 },
             ],
@@ -95,7 +95,7 @@ return [
         'packages' => [
             DbAdminPackage::class => [
                 'provider' => function(array $options) {
-                    $cfgFilePath = __DIR__ . '/config.php';
+                    $cfgFilePath = __DIR__ . '/servers.php';
                     $reader = jaxon()->di()->g(UserFileReader::class);
                     return $reader->getOptions($cfgFilePath, $options);
                 },

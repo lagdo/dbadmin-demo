@@ -10,6 +10,12 @@ function page(): string
 
 require dirname(__DIR__, 2) . '/vendor/autoload.php';
 
+$appDir = dirname(__DIR__);
+$page = page();
+
+$dotenv = Dotenv\Dotenv::createUnsafeImmutable($appDir);
+$dotenv->load();
+
 $dialog = jaxon()->getResponse()->dialog();
 $warningHandler = fn(Exception $e) => $dialog->title('Warning')->warning($e->getMessage());
 $errorHandler = fn(Exception $e) => $dialog->title('Error')->error($e->getMessage());
@@ -17,8 +23,5 @@ $errorHandler = fn(Exception $e) => $dialog->title('Error')->error($e->getMessag
 jaxon()->callback()->error($warningHandler, AppException::class);
 jaxon()->callback()->error($errorHandler, ValidationException::class);
 jaxon()->callback()->error($errorHandler);
-
-$appDir = dirname(__DIR__);
-$page = page();
 
 jaxon()->app()->setup(__DIR__ . "/$page.php");
