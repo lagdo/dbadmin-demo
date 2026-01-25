@@ -36,33 +36,11 @@ $readyScript = attr()->package(DbAdminPackage::class, 'ready');
 <?php $this->endblock() ?>
 
 <?php $this->block('content') ?>
-    <div id="layoutSidenav">
-      <div id="layoutSidenav_nav">
-        <nav class="sb-sidenav accordion" id="sidenavAccordion">
-          <div class="sb-sidenav-menu">
-            <?php echo $jaxon->package(DbAdminPackage::class)->sidebar() ?>
-          </div>
-        </nav>
-      </div>
-
-      <div id="layoutSidenav_content">
-        <main id="jaxon-dbadmin">
-          <div class="container-fluid">
-            <?php echo $jaxon->package(DbAdminPackage::class)->wrapper() ?>
-          </div>
-        </main>
-        <footer class="py-4 bg-light mt-auto">
-          <div class="container-fluid px-4">
-            <div class="d-flex align-items-center justify-content-between small">
-              <div class="text-muted">Copyright &copy; Your Website 2023</div>
-              <div>
-                <a href="#">Privacy Policy</a>
-                &middot;
-                <a href="#">Terms &amp; Conditions</a>
-              </div>
-            </div>
-          </div>
-        </footer>
-      </div>
+    <div id="layoutSidenav_content">
+      <main>
+        <div class="container-fluid px-3">
+          <?php echo $jaxon->package(DbAdminPackage::class)->layout() ?>
+        </div>
+      </main>
     </div>
 <?php $this->endblock() ?>

@@ -23,13 +23,29 @@
       .sb-sidenav-menu > .row {
         margin-right: 0px;
       }
+      #layoutSidenav_content {
+          padding-top: 10px;
+      }
     </style>
     <?= $this->header ?>
   </head>
-  <body class="sb-nav-fixed">
+  <body>
     <?= $this->navbar ?>
 
     <?= $this->content ?>
+
+    <footer class="py-4 bg-light mt-auto">
+      <div class="container-fluid px-4">
+        <div class="d-flex align-items-center justify-content-between small">
+          <div class="text-muted">Copyright &copy; Your Website 2023</div>
+          <div>
+            <a href="#">Privacy Policy</a>
+            &middot;
+            <a href="#">Terms &amp; Conditions</a>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.min.js"></script>
