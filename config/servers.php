@@ -14,16 +14,16 @@ return [
             'dbadmin-pgsql-14' => [ // A unique identifier for this server
                 'driver' => 'pgsql',
                 'name' => 'PostgreSQL 14',     // The name to be displayed in the dashboard UI.
-                'host' => 'dbadmin-pgsql-14',  // The database host name or address.
-                'port' => 5432,      // The database port. Optional.
+                'host' => 'pgsql.addr',  // The database host name or address.
+                'port' => 5433,      // The database port. Optional.
                 'username' => 'postgres', // The database user credentials.
                 'password' => 'dbadmin', // The database user credentials.
             ],
             'dbadmin-pgsql-17' => [ // A unique identifier for this server
                 'driver' => 'pgsql',
                 'name' => 'PostgreSQL 17',     // The name to be displayed in the dashboard UI.
-                'host' => 'dbadmin-pgsql-17',  // The database host name or address.
-                'port' => 5432,      // The database port. Optional.
+                'host' => 'pgsql.addr',  // The database host name or address.
+                'port' => 5434,      // The database port. Optional.
                 'username' => 'postgres', // The database user credentials.
                 'password' => 'dbadmin', // The database user credentials.
             ],
@@ -31,16 +31,16 @@ return [
                 'driver' => 'mysql',
                 // 'prefer_pdo' => true,
                 'name' => 'MariaDB 10',     // The name to be displayed in the dashboard UI.
-                'host' => 'dbadmin-mariadb',     // The database host name or address.
-                'port' => 3306,      // The database port. Optional.
+                'host' => 'maria.addr',     // The database host name or address.
+                'port' => 3307,      // The database port. Optional.
                 'username' => 'root', // The database user credentials.
                 'password' => 'dbadmin', // The database user credentials.
             ],
             'dbadmin-mysql' => [ // A unique identifier for this server
                 'driver' => 'mysql',
                 'name' => 'MySQL 8',     // The name to be displayed in the dashboard UI.
-                'host' => 'dbadmin-mysql',     // The database host name or address.
-                'port' => 3306,      // The database port. Optional.
+                'host' => 'mysql.addr',     // The database host name or address.
+                'port' => 3308,      // The database port. Optional.
                 'username' => 'root', // The database user credentials.
                 'password' => 'dbadmin', // The database user credentials.
             ],
