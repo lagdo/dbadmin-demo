@@ -40,11 +40,7 @@ $readyScript = attr()->package(DbAuditPackage::class, 'ready');
 <?php $this->endblock() ?>
 
 <?php $this->block('content') ?>
-    <div id="layoutSidenav_content">
-      <main>
         <div class="container-fluid px-3">
           <?php echo $jaxon->package(DbAuditPackage::class)->layout() ?>
         </div>
-      </main>
-    </div>
 <?php $this->endblock() ?>

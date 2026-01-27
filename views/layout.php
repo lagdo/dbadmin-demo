@@ -30,9 +30,17 @@
     <?= $this->header ?>
   </head>
   <body>
-    <?= $this->navbar ?>
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-primary">
+      <?= $this->navbar ?>
+    </nav>
 
-    <?= $this->content ?>
+    <div id="layoutSidenav">
+      <div id="layoutSidenav_content">
+        <main>
+          <?= $this->content ?>
+        </main>
+      </div>
+    </div>
 
     <footer class="py-4 bg-light mt-auto">
       <div class="container-fluid px-4">
