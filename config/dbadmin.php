@@ -1,8 +1,11 @@
 <?php
 
+use Infisical\SDK\InfisicalSDK;
+use Jaxon\Di\Container;
 use Lagdo\DbAdmin\Db\Config\AuthInterface;
 use Lagdo\DbAdmin\Db\Config\UserFileReader;
 use Lagdo\DbAdmin\Db\DbAdminPackage;
+use Lagdo\DbAdmin\Demo\Config\InfisicalConfigReader;
 use Lagdo\DbAdmin\Demo\Log\Logger;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemException;
@@ -56,6 +59,19 @@ return [
                         return getenv('DBADMIN_ROLE') ?: '';
                     }
                 },
+                InfisicalConfigReader::class => function(Container $di) {
+                    $auth = $di->g(AuthInterface::class);
+
+                    $infisicalSdk = new InfisicalSDK(getenv('INFISICAL_SERVER_URL'));
+                    $clientId = getenv('INFISICAL_MACHINE_CLIENT_ID');
+                    $clientSecret = getenv('INFISICAL_MACHINE_CLIENT_SECRET');
+                    // Authenticate on the Infisical server.
+                    $infisicalSdk->auth()->universalAuth()->login($clientId, $clientSecret);
+                    // Create the Infisical secrets service.
+                    $secrets = $infisicalSdk->secrets();
+                    $projectId = getenv('INFISICAL_PROJECT_ID');
+                    return new InfisicalConfigReader($auth, $secrets, $projectId, 'dev');
+                },
             ],
         ],
         'assets' => [
@@ -99,6 +115,9 @@ return [
                     $reader = jaxon()->di()->g(UserFileReader::class);
                     return $reader->getOptions($cfgFilePath, $options);
                 },
+                'config' => [
+                    'reader' => Lagdo\DbAdmin\Demo\Config\InfisicalConfigReader::class,
+                ],
                 'access' => [
                     'server' => false,
                     'system' => false,
@@ -167,7 +186,7 @@ return [
         ],
         'js' => [
             'lib' => [
-                'uri' => 'https://cdn.jsdelivr.net/gh/jaxon-php/jaxon-js@5.1.0/dist',
+                // 'uri' => '',
             ],
         ],
     ],
