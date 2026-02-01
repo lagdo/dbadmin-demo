@@ -110,9 +110,9 @@ return [
         ],
         'packages' => [
             DbAdminPackage::class => [
-                'provider' => function(array $options) {
+                'provider' => function(array $options, Container $di) {
                     $cfgFilePath = __DIR__ . '/servers.php';
-                    $reader = jaxon()->di()->g(UserFileReader::class);
+                    $reader = $di->g(UserFileReader::class);
                     return $reader->getOptions($cfgFilePath, $options);
                 },
                 'config' => [
