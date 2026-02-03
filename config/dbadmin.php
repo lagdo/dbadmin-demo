@@ -60,8 +60,6 @@ return [
                     }
                 },
                 InfisicalConfigReader::class => function(Container $di) {
-                    $auth = $di->g(AuthInterface::class);
-
                     $infisicalSdk = new InfisicalSDK(getenv('INFISICAL_SERVER_URL'));
                     $clientId = getenv('INFISICAL_MACHINE_CLIENT_ID');
                     $clientSecret = getenv('INFISICAL_MACHINE_CLIENT_SECRET');
@@ -70,6 +68,8 @@ return [
                     // Create the Infisical secrets service.
                     $secrets = $infisicalSdk->secrets();
                     $projectId = getenv('INFISICAL_PROJECT_ID');
+
+                    $auth = $di->g(AuthInterface::class);
                     return new InfisicalConfigReader($auth, $secrets, $projectId, 'dev');
                 },
             ],

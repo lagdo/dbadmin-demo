@@ -6,9 +6,9 @@ return [
             'server' => true,
             'system' => false,
         ],
-        'default' => 'dbadmin-pgsql-14',
     ],
     'fallback' => [
+        'default' => 'dbadmin-pgsql-14',
         'servers' => [
             // The database servers
             'dbadmin-pgsql-14' => [ // A unique identifier for this server
