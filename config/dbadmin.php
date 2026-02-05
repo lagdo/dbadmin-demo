@@ -87,6 +87,9 @@ return [
                 'alert' => 'sweetalert',
                 'confirm' => 'sweetalert',
             ],
+            'lib' => [
+                'use' => ['notyf'],
+            ],
         ],
         'storage' => [
             'stores' => [
@@ -110,6 +113,9 @@ return [
         ],
         'packages' => [
             DbAdminPackage::class => [
+                'toast' => [
+                    'lib' => 'notyf',
+                ],
                 'provider' => function(array $options, Container $di) {
                     $cfgFilePath = __DIR__ . '/servers.php';
                     $reader = $di->g(UserFileReader::class);
