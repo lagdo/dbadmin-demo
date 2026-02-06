@@ -6,6 +6,24 @@ use Psr\Log\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LoggerTrait;
 use Psr\Log\LogLevel;
+use Throwable;
+
+use function array_map;
+use function count;
+use function date;
+use function debug_backtrace;
+use function file_exists;
+use function file_put_contents;
+use function filesize;
+use function implode;
+use function in_array;
+use function json_encode;
+use function rename;
+use function set_error_handler;
+use function set_exception_handler;
+use function sprintf;
+use function strtoupper;
+use function time;
 
 class Logger implements LoggerInterface
 {
@@ -32,7 +50,8 @@ class Logger implements LoggerInterface
      */
     private function addContext(string $message, array $context): string
     {
-        return $message . "\n" . json_encode($context, JSON_PRETTY_PRINT);
+        return count($context) === 0 ? $message :
+            "$message\n" . json_encode($context, JSON_PRETTY_PRINT);
     }
 
     /**
@@ -83,11 +102,11 @@ class Logger implements LoggerInterface
     /**
      * Handle uncaught exceptions and log them.
      *
-     * @param \Throwable $exception The uncaught exception.
+     * @param Throwable $exception The uncaught exception.
      *
      * @return void
      */
-    public function exceptionHandler(\Throwable $exception): void
+    public function exceptionHandler(Throwable $exception): void
     {
         $errorMessage = sprintf(
             "Uncaught Exception: %s in %s on line %d",
@@ -99,15 +118,26 @@ class Logger implements LoggerInterface
     }
 
     /**
+     * Get the log file name.
+     *
+     * @return string
+     */
+    private function logFileName(): string
+    {
+        return "{$this->logFileName}{$this->logFileExt}";
+    }
+
+    /**
      * Rotate the log file if it exceeds the maximum size.
      *
      * @return void
      */
     private function rotateLogFile(): void
     {
-        $fileName = "{$this->logFileName}.{$this->logFileExt}";
+        $fileName = $this->logFileName();
         if (file_exists($fileName) && filesize($fileName) > $this->maxFileSize) {
-            rename($fileName, $this->logFileName . '.' . time() . '.' . $this->logFileExt);
+            $time = time();
+            rename($fileName, "{$this->logFileName}.$time{$this->logFileExt}");
         }
     }
 
@@ -123,9 +153,8 @@ class Logger implements LoggerInterface
     {
         $timestamp = date('Y-m-d H:i:s');
         $logEntry = "[$timestamp] [$level] $message" . PHP_EOL;
-        $fileName = "{$this->logFileName}{$this->logFileExt}";
 
-        file_put_contents($fileName, $logEntry, FILE_APPEND | LOCK_EX);
+        file_put_contents($this->logFileName(), $logEntry, FILE_APPEND | LOCK_EX);
     }
 
     /**
