@@ -119,7 +119,7 @@ return [
                 'provider' => function(array $options, Container $di) {
                     $cfgFilePath = __DIR__ . '/servers.php';
                     $reader = $di->g(UserFileReader::class);
-                    return $reader->getOptions($cfgFilePath, $options);
+                    return $reader->config($cfgFilePath)->getOptions($options);
                 },
                 'config' => [
                     'reader' => Lagdo\DbAdmin\Demo\Config\InfisicalConfigReader::class,
