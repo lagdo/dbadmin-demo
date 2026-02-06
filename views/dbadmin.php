@@ -30,7 +30,7 @@ $readyScript = attr()->package(DbAdminPackage::class, 'ready');
 ?>
 <?php if($readyScript !== ''): ?>
 <script type='text/javascript'>
-  <?= $readyScript ?>;
+  <?= $readyScript ?>
 </script>
 <?php endif ?>
 <?php $this->endblock() ?>
