@@ -1,11 +1,10 @@
 <?php
 
-use Infisical\SDK\InfisicalSDK;
 use Jaxon\Di\Container;
 use Lagdo\DbAdmin\Db\Config\AuthInterface;
+use Lagdo\DbAdmin\Db\Config\InfisicalConfigReader;
 use Lagdo\DbAdmin\Db\Config\UserFileReader;
 use Lagdo\DbAdmin\Db\DbAdminPackage;
-use Lagdo\DbAdmin\Demo\Config\InfisicalConfigReader;
 use Lagdo\DbAdmin\Demo\Log\Logger;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemException;
@@ -26,6 +25,14 @@ function getExportStorage(): Filesystem
 function getExportPath(string $filename): string
 {
     return "users/$filename";
+}
+
+if (!function_exists('env'))
+{
+    function env(string $name, mixed $default = null): mixed
+    {
+        return getenv($name) ?? $default;
+    }
 }
 
 return [
@@ -52,25 +59,20 @@ return [
                 AuthInterface::class => fn() => new class implements AuthInterface {
                     public function user(): string
                     {
-                        return getenv('DBADMIN_USER') ?: '';
+                        return env('DBADMIN_USER', '');
                     }
                     public function role(): string
                     {
-                        return getenv('DBADMIN_ROLE') ?: '';
+                        return env('DBADMIN_ROLE', '');
                     }
                 },
-                InfisicalConfigReader::class => function(Container $di) {
-                    $infisicalSdk = new InfisicalSDK(getenv('INFISICAL_SERVER_URL'));
-                    $clientId = getenv('INFISICAL_MACHINE_CLIENT_ID');
-                    $clientSecret = getenv('INFISICAL_MACHINE_CLIENT_SECRET');
-                    // Authenticate on the Infisical server.
-                    $infisicalSdk->auth()->universalAuth()->login($clientId, $clientSecret);
-                    // Create the Infisical secrets service.
-                    $secrets = $infisicalSdk->secrets();
-                    $projectId = getenv('INFISICAL_PROJECT_ID');
-
-                    $auth = $di->g(AuthInterface::class);
-                    return new InfisicalConfigReader($auth, $secrets, $projectId, 'dev');
+            ],
+            'extend' => [
+                InfisicalConfigReader::class => function(InfisicalConfigReader $reader) {
+                    $secretKeyBuilder = fn(string $prefix, string $option) =>
+                        "users.{$prefix}.{$option}";
+                    $reader->setSecretKeyBuilder($secretKeyBuilder);
+                    return $reader;
                 },
             ],
         ],
@@ -122,7 +124,7 @@ return [
                     return $reader->config($cfgFilePath)->getOptions($options);
                 },
                 'config' => [
-                    'reader' => Lagdo\DbAdmin\Demo\Config\InfisicalConfigReader::class,
+                    'reader' => InfisicalConfigReader::class,
                 ],
                 'access' => [
                     'server' => false,

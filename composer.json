@@ -22,7 +22,6 @@
         "lagdo/dbadmin-driver-sqlite": "0.22.*",
         "lagdo/jaxon-dbadmin": "0.27.*",
         "lagdo/ui-builder-bootstrap5": "0.5.*",
-        "infisical/php-sdk": "^0.0.1",
         "vlucas/phpdotenv": "^5.4.1"
     },
     "autoload": {
