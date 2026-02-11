@@ -2,6 +2,8 @@
 
 use Lagdo\DbAdmin\Ajax\Exception\AppException;
 use Lagdo\DbAdmin\Ajax\Exception\ValidationException;
+use Lagdo\Facades\ContainerWrapper;
+use Psr\Log\LoggerInterface;
 
 function page(): string
 {
@@ -23,5 +25,10 @@ $errorHandler = fn(Exception $e) => $dialog->title('Error')->error($e->getMessag
 jaxon()->callback()->error($warningHandler, AppException::class);
 jaxon()->callback()->error($errorHandler, ValidationException::class);
 jaxon()->callback()->error($errorHandler);
+
+ContainerWrapper::registerLocalServices([
+    'filename' => "$appDir/logs/$page",
+]);
+jaxon()->di()->setLogger(ContainerWrapper::getContainer()->get(LoggerInterface::class));
 
 jaxon()->app()->setup(__DIR__ . "/$page.php");

@@ -1,8 +1,6 @@
 <?php
 
 use Lagdo\DbAdmin\Db\DbAuditPackage;
-use Lagdo\DbAdmin\Demo\Log\Logger;
-use Psr\Log\LoggerInterface;
 
 $appDir = dirname(__DIR__);
 
@@ -22,11 +20,6 @@ return [
                 'directory' => "$appDir/views",
                 'extension' => '.php',
                 'renderer' => 'jaxon',
-            ],
-        ],
-        'container' => [
-            'set' => [
-                LoggerInterface::class => fn() => new Logger("$appDir/logs/dbaudit"),
             ],
         ],
         'assets' => [

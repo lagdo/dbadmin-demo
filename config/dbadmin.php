@@ -5,12 +5,10 @@ use Lagdo\DbAdmin\Db\Config\AuthInterface;
 use Lagdo\DbAdmin\Db\Config\InfisicalConfigReader;
 use Lagdo\DbAdmin\Db\Config\UserFileReader;
 use Lagdo\DbAdmin\Db\DbAdminPackage;
-use Lagdo\DbAdmin\Demo\Log\Logger;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\UnableToReadFile;
 use League\Flysystem\UnableToWriteFile;
-use Psr\Log\LoggerInterface;
 
 use function Jaxon\storage;
 
@@ -55,7 +53,6 @@ return [
         ],
         'container' => [
             'set' => [
-                LoggerInterface::class => fn() => new Logger("$appDir/logs/dbadmin"),
                 AuthInterface::class => fn() => new class implements AuthInterface {
                     public function user(): string
                     {
