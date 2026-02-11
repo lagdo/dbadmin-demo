@@ -3,19 +3,21 @@
 use Lagdo\DbAdmin\Ajax\Exception\AppException;
 use Lagdo\DbAdmin\Ajax\Exception\ValidationException;
 use Lagdo\Facades\ContainerWrapper;
-use Psr\Log\LoggerInterface;
+use Lagdo\Facades\Logger;
 
 function page(): string
 {
     return ($_GET['page'] ?? '') === 'audit' ? 'dbaudit' : 'dbadmin';
 }
 
+function base_dir(): string
+{
+    return dirname(__DIR__);
+}
+
 require dirname(__DIR__, 2) . '/vendor/autoload.php';
 
-$appDir = dirname(__DIR__);
-$page = page();
-
-$dotenv = Dotenv\Dotenv::createUnsafeImmutable($appDir);
+$dotenv = Dotenv\Dotenv::createUnsafeImmutable(base_dir());
 $dotenv->load();
 
 $dialog = jaxon()->getResponse()->dialog();
@@ -27,8 +29,8 @@ jaxon()->callback()->error($errorHandler, ValidationException::class);
 jaxon()->callback()->error($errorHandler);
 
 ContainerWrapper::registerLocalServices([
-    'filename' => "$appDir/logs/$page",
+    'filename' => base_dir() . '/logs/' . page(),
 ]);
-jaxon()->di()->setLogger(ContainerWrapper::getContainer()->get(LoggerInterface::class));
+jaxon()->di()->setLogger(Logger::instance());
 
-jaxon()->app()->setup(__DIR__ . "/$page.php");
+jaxon()->app()->setup(__DIR__ . '/config/' . page() . '.php');

@@ -2,14 +2,14 @@
 
 use Lagdo\DbAdmin\Db\DbAuditPackage;
 
-$appDir = dirname(__DIR__);
+$baseDir = base_dir();
 
 return [
     'app' => [
         'metadata' => [
             'cache' => [
                 'enabled' => false,
-                'dir' => "$appDir/cache/dbaudit/attributes",
+                'dir' => "$baseDir/cache/dbaudit/attributes",
             ],
         ],
         'ui' => [
@@ -17,7 +17,7 @@ return [
         ],
         'views' => [
             'tpl' => [
-                'directory' => "$appDir/views",
+                'directory' => "$baseDir/views",
                 'extension' => '.php',
                 'renderer' => 'jaxon',
             ],
@@ -26,7 +26,7 @@ return [
             'export' => false,
             'minify' => false,
             'uri' => '/jaxon/audit',
-            'dir' => "$appDir/public/jaxon/audit",
+            'dir' => "$baseDir/public/jaxon/audit",
             // 'file' => '',
         ],
         'packages' => [

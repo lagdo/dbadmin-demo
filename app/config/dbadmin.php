@@ -12,7 +12,7 @@ use League\Flysystem\UnableToWriteFile;
 
 use function Jaxon\storage;
 
-$appDir = dirname(__DIR__);
+$baseDir = base_dir();
 
 function getExportStorage(): Filesystem
 {
@@ -38,7 +38,7 @@ return [
         'metadata' => [
             'cache' => [
                 'enabled' => false,
-                'dir' => "$appDir/cache/dbadmin/attributes",
+                'dir' => "$baseDir/cache/dbadmin/attributes",
             ],
         ],
         'ui' => [
@@ -46,7 +46,7 @@ return [
         ],
         'views' => [
             'tpl' => [
-                'directory' => "$appDir/views",
+                'directory' => "$baseDir/views",
                 'extension' => '.php',
                 'renderer' => 'jaxon',
             ],
@@ -77,7 +77,7 @@ return [
             'export' => false,
             'minify' => false,
             'uri' => '/jaxon/admin',
-            'dir' => "$appDir/public/jaxon/admin",
+            'dir' => "$baseDir/public/jaxon/admin",
             // 'file' => '',
         ],
         'dialogs' => [
@@ -94,11 +94,11 @@ return [
             'stores' => [
                 'uploads' => [
                     'adapter' => 'local',
-                    'dir' => "$appDir/uploads",
+                    'dir' => "$baseDir/uploads",
                 ],
                 'exports' => [
                     'adapter' => 'local',
-                    'dir' => "$appDir/exports",
+                    'dir' => "$baseDir/exports",
                 ],
             ],
         ],
