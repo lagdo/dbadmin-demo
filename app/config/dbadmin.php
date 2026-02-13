@@ -25,11 +25,16 @@ function getExportPath(string $filename): string
     return "users/$filename";
 }
 
+function getInfisicalSecretKey(string $prefix, string $option, AuthInterface $auth): string
+{
+    return "users.{$prefix}.{$option}";
+}
+
 if (!function_exists('env'))
 {
     function env(string $name, mixed $default = null): mixed
     {
-        return getenv($name) ?? $default;
+        return getenv($name) ?: $default;
     }
 }
 
@@ -65,12 +70,8 @@ return [
                 },
             ],
             'extend' => [
-                InfisicalConfigReader::class => function(InfisicalConfigReader $reader) {
-                    $secretKeyBuilder = fn(string $prefix, string $option) =>
-                        "users.{$prefix}.{$option}";
-                    $reader->setSecretKeyBuilder($secretKeyBuilder);
-                    return $reader;
-                },
+                InfisicalConfigReader::class => fn(InfisicalConfigReader $reader) =>
+                    $reader->setSecretKeyBuilder(getInfisicalSecretKey(...)),
             ],
         ],
         'assets' => [
