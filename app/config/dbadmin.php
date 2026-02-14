@@ -168,6 +168,11 @@ return [
                             'limit' => 10,
                         ],
                     ],
+                    'user' => [
+                        'preferences' => [
+                            'enabled' => true,
+                        ],
+                    ],
                     'database' => [
                         // Same as the "servers" items, but "name" is the database name.
                         'driver' => 'sqlite',
