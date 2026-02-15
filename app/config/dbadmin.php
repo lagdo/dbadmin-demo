@@ -150,25 +150,28 @@ return [
                         }
                     },
                 ],
-                'audit' => [
-                    'options' => [
+                'queries' => [
+                    'record' => [
                         'library' => [
                             'enabled' => false,
                         ],
-                        'enduser' => [
+                        'builder' => [
                             'enabled' => true,
                         ],
-                        'history' => [
+                        'editor' => [
                             'enabled' => true,
+                        ],
+                    ],
+                    'admin' => [
+                        'history' => [
+                            'show' => true,
                             'distinct' => true,
                             'limit' => 10,
                         ],
                         'favorite' => [
-                            'enabled' => true,
+                            'show' => true,
                             'limit' => 10,
                         ],
-                    ],
-                    'user' => [
                         'preferences' => [
                             'enabled' => true,
                         ],

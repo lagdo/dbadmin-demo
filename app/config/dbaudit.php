@@ -31,6 +31,9 @@ return [
         ],
         'packages' => [
             DbAuditPackage::class => [
+                'audit' => [
+                    'enabled' => true,
+                ],
                 'database' => [
                     // Same as the "servers" items, but "name" is the database name.
                     'driver' => 'sqlite',
