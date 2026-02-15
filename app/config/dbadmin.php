@@ -3,7 +3,7 @@
 use Jaxon\Di\Container;
 use Lagdo\DbAdmin\Db\Config\AuthInterface;
 use Lagdo\DbAdmin\Db\Config\InfisicalConfigReader;
-use Lagdo\DbAdmin\Db\Config\UserFileReader;
+use Lagdo\DbAdmin\Db\Config\ConfigProvider;
 use Lagdo\DbAdmin\Db\DbAdminPackage;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemException;
@@ -118,7 +118,7 @@ return [
                 ],
                 'provider' => function(array $options, Container $di) {
                     $cfgFilePath = __DIR__ . '/servers.php';
-                    $reader = $di->g(UserFileReader::class);
+                    $reader = $di->g(ConfigProvider::class);
                     return $reader->config($cfgFilePath)->getOptions($options);
                 },
                 'config' => [
