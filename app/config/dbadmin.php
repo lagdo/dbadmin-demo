@@ -88,7 +88,7 @@ return [
                 'confirm' => 'sweetalert',
             ],
             'lib' => [
-                'use' => ['notyf'],
+                'use' => ['butterup'],
             ],
         ],
         'storage' => [
@@ -114,7 +114,7 @@ return [
         'packages' => [
             DbAdminPackage::class => [
                 'toast' => [
-                    'lib' => 'notyf',
+                    'lib' => 'butterup',
                 ],
                 'provider' => function(array $options, Container $di) {
                     $cfgFilePath = __DIR__ . '/servers.php';
