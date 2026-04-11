@@ -151,6 +151,7 @@ return [
                     },
                 ],
                 'queries' => [
+                    'editor' => 'cm', // 'cm' for CodeMirror or 'ace' for Ace Editor.
                     'record' => [
                         'library' => [
                             'enabled' => false,
