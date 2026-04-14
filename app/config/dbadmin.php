@@ -113,8 +113,13 @@ return [
         ],
         'packages' => [
             DbAdminPackage::class => [
-                'toast' => [
-                    'lib' => 'butterup',
+                'ui' => [
+                    'toast' => [
+                        'lib' => 'butterup',
+                    ],
+                    'query' => [
+                        'editor' => 'cm', // 'cm' for CodeMirror or 'ace' for Ace Editor.
+                    ],
                 ],
                 'provider' => function(array $options, Container $di) {
                     $cfgFilePath = __DIR__ . '/servers.php';
@@ -151,7 +156,6 @@ return [
                     },
                 ],
                 'queries' => [
-                    'editor' => 'cm', // 'cm' for CodeMirror or 'ace' for Ace Editor.
                     'record' => [
                         'library' => [
                             'enabled' => false,
