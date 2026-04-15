@@ -1,6 +1,6 @@
 <?php
 
-use Lagdo\DbAdmin\Db\DbAuditPackage;
+use Lagdo\DbAdmin\App\DbAuditPackage;
 
 $baseDir = base_dir();
 

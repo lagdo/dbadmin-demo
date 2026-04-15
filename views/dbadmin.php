@@ -1,7 +1,7 @@
 <?php $this->extends('tpl::layout') ?>
 
 <?php
-use Lagdo\DbAdmin\Db\DbAdminPackage;
+use Lagdo\DbAdmin\App\DbAdminPackage;
 
 use function Jaxon\attr;
 

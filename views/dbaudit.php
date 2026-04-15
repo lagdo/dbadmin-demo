@@ -1,13 +1,9 @@
 <?php $this->extends('tpl::layout') ?>
 
 <?php
-use Lagdo\DbAdmin\Ajax\Audit\Sidebar;
-use Lagdo\DbAdmin\Ajax\Audit\Wrapper;
-use Lagdo\DbAdmin\Db\DbAuditPackage;
+use Lagdo\DbAdmin\App\DbAuditPackage;
 
 use function Jaxon\attr;
-use function Jaxon\cl;
-use function Jaxon\rq;
 
 $jaxon = Jaxon\jaxon();
 ?>

@@ -1,10 +1,10 @@
 <?php
 
 use Jaxon\Di\Container;
-use Lagdo\DbAdmin\Db\Config\AuthInterface;
-use Lagdo\DbAdmin\Db\Config\InfisicalConfigReader;
-use Lagdo\DbAdmin\Db\Config\ConfigProvider;
-use Lagdo\DbAdmin\Db\DbAdminPackage;
+use Lagdo\DbAdmin\App\DbAdminPackage;
+use Lagdo\DbAdmin\Support\Config\AuthInterface;
+use Lagdo\DbAdmin\Support\Config\InfisicalConfigReader;
+use Lagdo\DbAdmin\Support\Config\ConfigProvider;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\UnableToReadFile;
