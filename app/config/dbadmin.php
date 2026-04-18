@@ -28,6 +28,11 @@ function getInfisicalSecretKey(string $prefix, string $option, Config\AuthInterf
     return "users.{$prefix}.{$option}";
 }
 
+function getAwsSecretsSecretName(string $prefix, Config\AuthInterface $auth): string
+{
+    return "users.{$prefix}";
+}
+
 if (!function_exists('env'))
 {
     function env(string $name, mixed $default = null): mixed
@@ -72,6 +77,9 @@ return [
                 Config\Server\InfisicalConfigProvider::class =>
                     fn(Config\Server\InfisicalConfigProvider $provider) =>
                         $provider->setSecretKeyBuilder(getInfisicalSecretKey(...)),
+                Config\Server\AwsSecretsConfigProvider::class =>
+                    fn(Config\Server\AwsSecretsConfigProvider $provider) =>
+                        $provider->setSecretNameBuilder(getAwsSecretsSecretName(...)),
             ],
         ],
         'assets' => [
