@@ -2,9 +2,7 @@
 
 use Jaxon\Di\Container;
 use Lagdo\DbAdmin\App\DbAdminPackage;
-use Lagdo\DbAdmin\Support\Config\AuthInterface;
-use Lagdo\DbAdmin\Support\Config\InfisicalConfigReader;
-use Lagdo\DbAdmin\Support\Config\ConfigProvider;
+use Lagdo\DbAdmin\Support\Config;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\UnableToReadFile;
@@ -25,7 +23,7 @@ function getExportPath(string $filename): string
     return "users/$filename";
 }
 
-function getInfisicalSecretKey(string $prefix, string $option, AuthInterface $auth): string
+function getInfisicalSecretKey(string $prefix, string $option, Config\AuthInterface $auth): string
 {
     return "users.{$prefix}.{$option}";
 }
@@ -58,20 +56,22 @@ return [
         ],
         'container' => [
             'set' => [
-                AuthInterface::class => fn() => new class implements AuthInterface {
-                    public function user(): string
-                    {
-                        return env('DBADMIN_USER', '');
-                    }
-                    public function role(): string
-                    {
-                        return env('DBADMIN_ROLE', '');
-                    }
-                },
+                Config\AuthInterface::class =>
+                    fn() => new class implements Config\AuthInterface {
+                        public function user(): string
+                        {
+                            return env('DBADMIN_USER', '');
+                        }
+                        public function role(): string
+                        {
+                            return env('DBADMIN_ROLE', '');
+                        }
+                    },
             ],
             'extend' => [
-                InfisicalConfigReader::class => fn(InfisicalConfigReader $reader) =>
-                    $reader->setSecretKeyBuilder(getInfisicalSecretKey(...)),
+                Config\Server\InfisicalConfigProvider::class =>
+                    fn(Config\Server\InfisicalConfigProvider $provider) =>
+                        $provider->setSecretKeyBuilder(getInfisicalSecretKey(...)),
             ],
         ],
         'assets' => [
@@ -123,15 +123,12 @@ return [
                 ],
                 'provider' => function(array $options, Container $di) {
                     $cfgFilePath = __DIR__ . '/servers.php';
-                    $reader = $di->g(ConfigProvider::class);
-                    return $reader->config($cfgFilePath)->getOptions($options);
+                    $provider = $di->g(Config\PackageConfigProvider::class);
+                    return $provider->config($cfgFilePath)->getOptions($options);
                 },
-                'config' => [
-                    'reader' => InfisicalConfigReader::class,
-                ],
-                'access' => [
-                    'server' => false,
-                    'system' => false,
+                'reader' => [
+                    'server' => Config\Server\ServerConfigProvider::class,
+                    'access' => Config\Server\AwsSecretsConfigProvider::class,
                 ],
                 'export' => [
                     'writer' => function(string $content, string $filename): string {
