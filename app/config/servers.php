@@ -44,7 +44,7 @@ return [
                 // 'username' => 'root', // The database user credentials.
                 // 'password' => 'dbadmin', // The database user credentials.
             ],
-            'sqlite-3' => [ // A unique identifier for this server/var/www
+            'dbadmin-sqlite3' => [ // A unique identifier for this server/var/www
                 'driver' => 'sqlite',
                 'name' => 'Sqlite 3',     // The name to be displayed in the dashboard UI.
                 'directory' => '/var/lib/sqlite/3', // The directory containing the database files.
