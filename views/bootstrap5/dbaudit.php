@@ -8,7 +8,7 @@ use function Jaxon\attr;
 $jaxon = Jaxon\jaxon();
 ?>
 
-<?php $this->block('navbar') ?>
+<?php $this->block('pageHeader') ?>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-primary">
       <!-- Navbar Brand-->
       <a class="navbar-brand ps-3" href="/">Jaxon DbAdmin Demo Logs</a>
@@ -19,13 +19,13 @@ $jaxon = Jaxon\jaxon();
     </nav>
 <?php $this->endblock() ?>
 
-<?php $this->block('header') ?>
+<?php $this->block('htmlHeader') ?>
 <?php
 echo $jaxon->getCss(), "\n";
 ?>
 <?php $this->endblock() ?>
 
-<?php $this->block('footer') ?>
+<?php $this->block('htmlFooter') ?>
 <?php
 echo $jaxon->getJs(), "\n", $jaxon->getScript(), "\n";
 $readyScript = attr()->package(DbAuditPackage::class, 'ready');
@@ -37,7 +37,7 @@ $readyScript = attr()->package(DbAuditPackage::class, 'ready');
 <?php endif ?>
 <?php $this->endblock() ?>
 
-<?php $this->block('content') ?>
+<?php $this->block('pageContent') ?>
         <div class="container-fluid px-3">
           <?php echo $jaxon->package(DbAuditPackage::class)->layout() ?>
         </div>

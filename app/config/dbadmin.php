@@ -54,7 +54,7 @@ return [
         ],
         'views' => [
             'tpl' => [
-                'directory' => "$baseDir/views",
+                'directory' => "$baseDir/views/bootstrap5",
                 'extension' => '.php',
                 'renderer' => 'jaxon',
             ],

@@ -27,17 +27,17 @@
           padding-top: 10px;
       }
     </style>
-    <?= $this->header ?>
+    <?= $this->htmlHeader ?>
   </head>
   <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-primary">
-      <?= $this->navbar ?>
+      <?= $this->pageHeader ?>
     </nav>
 
     <div id="layoutSidenav">
       <div id="layoutSidenav_content">
         <main>
-          <?= $this->content ?>
+          <?= $this->pageContent ?>
         </main>
       </div>
     </div>
@@ -59,5 +59,5 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   <script src="sb-admin/dist/js/scripts.js"></script>
-  <?= $this->footer ?>
+  <?= $this->htmlFooter ?>
 </html>
