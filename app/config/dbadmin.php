@@ -2,7 +2,7 @@
 
 use Jaxon\Di\Container;
 use Lagdo\DbAdmin\App\DbAdminPackage;
-use Lagdo\DbAdmin\Support\Config;
+use Lagdo\DbAdmin\Support\Provider;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\UnableToReadFile;
@@ -23,12 +23,12 @@ function getExportPath(string $filename): string
     return "users/$filename";
 }
 
-function getInfisicalSecretKey(string $prefix, string $option, Config\AuthInterface $auth): string
+function getInfisicalSecretKey(string $prefix, string $option, Provider\AuthInterface $auth): string
 {
     return "users.{$prefix}.{$option}";
 }
 
-function getAwsSecretsSecretName(string $prefix, Config\AuthInterface $auth): string
+function getAwsSecretsSecretName(string $prefix, Provider\AuthInterface $auth): string
 {
     return "users.{$prefix}";
 }
@@ -61,8 +61,8 @@ return [
         ],
         'container' => [
             'set' => [
-                Config\AuthInterface::class =>
-                    fn() => new class implements Config\AuthInterface {
+                Provider\AuthInterface::class =>
+                    fn() => new class implements Provider\AuthInterface {
                         public function user(): string
                         {
                             return env('DBADMIN_USER', '');
@@ -74,11 +74,11 @@ return [
                     },
             ],
             'extend' => [
-                Config\Server\InfisicalConfigProvider::class =>
-                    fn(Config\Server\InfisicalConfigProvider $provider) =>
+                Provider\Secret\InfisicalConfigProvider::class =>
+                    fn(Provider\Secret\InfisicalConfigProvider $provider) =>
                         $provider->setSecretKeyBuilder(getInfisicalSecretKey(...)),
-                Config\Server\AwsSecretsConfigProvider::class =>
-                    fn(Config\Server\AwsSecretsConfigProvider $provider) =>
+                Provider\Secret\AwsSecretsConfigProvider::class =>
+                    fn(Provider\Secret\AwsSecretsConfigProvider $provider) =>
                         $provider->setSecretNameBuilder(getAwsSecretsSecretName(...)),
             ],
         ],
@@ -131,12 +131,12 @@ return [
                 ],
                 'provider' => function(array $options, Container $di) {
                     $cfgFilePath = __DIR__ . '/servers.php';
-                    $provider = $di->g(Config\PackageConfigProvider::class);
+                    $provider = $di->g(Provider\PackageConfigProvider::class);
                     return $provider->config($cfgFilePath)->getOptions($options);
                 },
                 'reader' => [
-                    'server' => Config\Server\ServerConfigProvider::class,
-                    'access' => Config\Server\AwsSecretsConfigProvider::class,
+                    'server' => Provider\Config\ServerConfigProvider::class,
+                    'access' => Provider\Secret\AwsSecretsConfigProvider::class,
                 ],
                 'export' => [
                     'writer' => function(string $content, string $filename): string {
