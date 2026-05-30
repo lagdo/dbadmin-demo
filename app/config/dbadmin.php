@@ -28,9 +28,19 @@ function getInfisicalSecretKey(string $prefix, string $option, Provider\AuthInte
     return "users.{$prefix}.{$option}";
 }
 
-function getAwsSecretsSecretName(string $prefix, Provider\AuthInterface $auth): string
+function getAwsSecretSecretKey(string $prefix, Provider\AuthInterface $auth): string
 {
     return "users.{$prefix}";
+}
+
+function getGcpSecretSecretKey(string $prefix, string $option, Provider\AuthInterface $auth): string
+{
+    return "db.users.{$prefix}.{$option}";
+}
+
+function getOpenBaoSecretKey(string $prefix, string $option, Provider\AuthInterface $auth): string
+{
+    return "db.users.{$prefix}.{$option}";
 }
 
 if (!function_exists('env'))
@@ -77,9 +87,15 @@ return [
                 Provider\Secret\InfisicalConfigProvider::class =>
                     fn(Provider\Secret\InfisicalConfigProvider $provider) =>
                         $provider->setSecretKeyBuilder(getInfisicalSecretKey(...)),
-                Provider\Secret\AwsSecretsConfigProvider::class =>
-                    fn(Provider\Secret\AwsSecretsConfigProvider $provider) =>
-                        $provider->setSecretNameBuilder(getAwsSecretsSecretName(...)),
+                Provider\Secret\AwsSecretConfigProvider::class =>
+                    fn(Provider\Secret\AwsSecretConfigProvider $provider) =>
+                        $provider->setSecretKeyBuilder(getAwsSecretSecretKey(...)),
+                Provider\Secret\GcpSecretConfigProvider::class =>
+                    fn(Provider\Secret\GcpSecretConfigProvider $provider) =>
+                        $provider->setSecretKeyBuilder(getGcpSecretSecretKey(...)),
+                Provider\Secret\OpenBaoConfigProvider::class =>
+                    fn(Provider\Secret\OpenBaoConfigProvider $provider) =>
+                        $provider->setSecretKeyBuilder(getOpenBaoSecretKey(...)),
             ],
         ],
         'assets' => [
@@ -136,7 +152,7 @@ return [
                 },
                 'reader' => [
                     'server' => Provider\Config\ServerConfigProvider::class,
-                    'access' => Provider\Secret\AwsSecretsConfigProvider::class,
+                    'access' => Provider\Secret\OpenBaoConfigProvider::class,
                 ],
                 'export' => [
                     'writer' => function(string $content, string $filename): string {

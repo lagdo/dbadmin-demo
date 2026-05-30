@@ -1,5 +1,6 @@
 composer.lock
 .env
+/gcp/
 /vendor/
 /build/
 /public/jaxon/
