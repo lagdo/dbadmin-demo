@@ -153,7 +153,7 @@ return [
                 },
                 'reader' => [
                     'server' => Provider\Config\ServerConfigProvider::class,
-                    'access' => Provider\Secret\OpenBaoConfigProvider::class,
+                    'access' => Provider\Secret\AwsSecretConfigProvider::class,
                 ],
                 'export' => [
                     'writer' => function(string $content, string $filename): string {
