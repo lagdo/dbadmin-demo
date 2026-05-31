@@ -40,7 +40,8 @@ function getGcpSecretSecretKey(string $prefix, string $option, Provider\AuthInte
 
 function getOpenBaoSecretKey(string $prefix, string $option, Provider\AuthInterface $auth): string
 {
-    return "db.users.{$prefix}.{$option}";
+    // The key is prefixed with "data/", for the KV2 API.
+    return "data/db.users.{$prefix}.{$option}";
 }
 
 if (!function_exists('env'))
