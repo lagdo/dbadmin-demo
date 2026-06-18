@@ -22,6 +22,8 @@
         "lagdo/dbadmin-driver-sqlite": "0.22.*",
         "lagdo/jaxon-dbadmin": "0.31.*",
         "lagdo/ui-builder-bootstrap5": "0.8.*",
+        "league/climate": "^3.11",
+        "nategood/commando": "^1.0",
         "vlucas/phpdotenv": "^5.4.1"
     },
     "autoload": {

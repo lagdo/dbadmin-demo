@@ -1,7 +1,7 @@
 <?php
 
-use Lagdo\DbAdmin\Ajax\Exception\AppException;
-use Lagdo\DbAdmin\Ajax\Exception\ValidationException;
+use Lagdo\DbAdmin\App\Ajax\Exception\AppException;
+use Lagdo\DbAdmin\App\Ajax\Exception\ValidationException;
 use Lagdo\Facades\ContainerWrapper;
 use Lagdo\Facades\Logger;
 
