@@ -3,11 +3,12 @@
 namespace Lagdo\DbAdmin\Demo;
 
 use Commando\Command;
-use Lagdo\DbAdmin\Driver\Sql\Dto\QueryCodeDto;
+use Lagdo\DbAdmin\Driver\Sql\Dto\QueryStreamDto;
 use Lagdo\DbAdmin\Support\Driver\DriverProxy;
 use League\CLImate\CLImate;
 
 use function Jaxon\jaxon;
+use function rtrim;
 
 class SplitterCommand
 {
@@ -29,11 +30,10 @@ class SplitterCommand
     public function __construct()
     {
         $this->driver = jaxon()->di()->g(DriverProxy::class);
-
-        $this->io = new CLImate;
+        $this->io = new CLImate();
 
         $this->command = new Command();
-        // Define a flag "-t" a.k.a. "--title"
+        // Define a flag "-f" a.k.a. "--file"
         $this->command->setHelp('Split the content of a SQL file into separate queries.')
             ->option('f')
             ->aka('file')
@@ -44,22 +44,22 @@ class SplitterCommand
     }
 
     /**
-     * @param QueryCodeDto $queryDto
+     * @param QueryStreamDto $stream
      * @param resource $fd
      *
      * @return bool
      */
-    private function readLineFromFile(QueryCodeDto $queryDto, mixed $fd): bool
+    private function readLineFromFile(QueryStreamDto $stream, mixed $fd): bool
     {
         if (!($queryLine = fgets($fd))) {
             return false;
         }
 
-        $queryDto->queryLine = $queryLine;
-        $queryDto->lineNumber++;
+        $stream->queryLine = $queryLine;
+        $stream->lineNumber++;
+        // Remove the newline char.
+        $this->io->green(">>> Line number {$stream->lineNumber}: " . rtrim($queryLine));
 
-        $queryLine = rtrim($queryLine); // Remove the newline char.
-        $this->io->green(">>> Line number {$queryDto->lineNumber}: {$queryLine}");
         return true;
     }
 
@@ -70,13 +70,13 @@ class SplitterCommand
     {
         $this->driver->selectDatabase('dbadmin-pgsql-14');
 
-        $queryLineReader = fn(QueryCodeDto $dto) =>
-            $this->readLineFromFile($dto, $this->command['file']);
-        $queryDto = new QueryCodeDto($queryLineReader);
+        $queryLineReader = fn(QueryStreamDto $stream) =>
+            $this->readLineFromFile($stream, $this->command['file']);
+        $stream = new QueryStreamDto($queryLineReader);
 
-        $queries = $this->driver->helper()->statement()->splitQueries($queryDto);
+        $queries = $this->driver->helper()->statement()->splitQueries($stream);
         foreach ($queries as $query) {
-            $this->io->blue("<<< Query number {$queryDto->queryCount}:");
+            $this->io->blue("<<< Query number {$stream->queryCount}:");
             $this->io->blue($query);
             $this->io->blue('<<<');
         }
