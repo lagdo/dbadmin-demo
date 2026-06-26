@@ -3,20 +3,17 @@
 namespace Lagdo\DbAdmin\Demo;
 
 use Commando\Command;
-use Lagdo\DbAdmin\Driver\Sql\Dto\QueryStreamDto;
-use Lagdo\DbAdmin\Support\Driver\DriverProxy;
+use Lagdo\DbAdmin\Support\Service\Query\QuerySplitter;
+use Lagdo\DbAdmin\Support\Service\Query\QueryStream;
 use League\CLImate\CLImate;
 
-use function Jaxon\jaxon;
+use function fgets;
+use function file_exists;
+use function fopen;
 use function rtrim;
 
 class SplitterCommand
 {
-    /**
-     * @var DriverProxy
-     */
-    private DriverProxy $driver;
-
     /**
      * @var CLImate
      */
@@ -27,9 +24,11 @@ class SplitterCommand
      */
     private Command $command;
 
-    public function __construct()
+    /**
+     * @param QuerySplitter $splitter
+     */
+    public function __construct(private QuerySplitter $splitter)
     {
-        $this->driver = jaxon()->di()->g(DriverProxy::class);
         $this->io = new CLImate();
 
         $this->command = new Command();
@@ -44,12 +43,12 @@ class SplitterCommand
     }
 
     /**
-     * @param QueryStreamDto $stream
+     * @param QueryStream $stream
      * @param resource $fd
      *
      * @return bool
      */
-    private function readLineFromFile(QueryStreamDto $stream, mixed $fd): bool
+    private function readLineFromFile(QueryStream $stream, mixed $fd): bool
     {
         if (!($queryLine = fgets($fd))) {
             return false;
@@ -68,13 +67,11 @@ class SplitterCommand
      */
     public function run(): void
     {
-        $this->driver->selectDatabase('dbadmin-pgsql-14');
-
-        $queryLineReader = fn(QueryStreamDto $stream) =>
+        $queryLineReader = fn(QueryStream $stream) =>
             $this->readLineFromFile($stream, $this->command['file']);
-        $stream = new QueryStreamDto($queryLineReader);
+        $stream = new QueryStream($queryLineReader);
 
-        $queries = $this->driver->helper()->statement()->splitQueries($stream);
+        $queries = $this->splitter->splitQueries($stream);
         foreach ($queries as $query) {
             $this->io->blue("<<< Query number {$stream->queryCount}:");
             $this->io->blue($query);

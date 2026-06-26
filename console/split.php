@@ -1,14 +1,9 @@
 #!/usr/local/bin/php
 <?php
 
+use Lagdo\DbAdmin\Support\Service\Query\QuerySplitter;
+
 require dirname(__DIR__) . '/app/boot.php';
 
-Lagdo\UiBuilder\Jaxon\registerUiBuilder();
-
-$bootCallbacks = jaxon()->callback()->popBootCallbacks();
-foreach ($bootCallbacks as $callback) {
-    $callback();
-}
-
-$command = new Lagdo\DbAdmin\Demo\SplitterCommand();
-$command->run();
+$splitter = jaxon()->di()->g(QuerySplitter::class);
+(new Lagdo\DbAdmin\Demo\SplitterCommand($splitter))->run();
