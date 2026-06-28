@@ -8,13 +8,6 @@ use function Jaxon\attr;
 $jaxon = Jaxon\jaxon();
 ?>
 
-<?php $this->block('pageHeader') ?>
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-primary">
-      <!-- Navbar Brand-->
-      <a class="navbar-brand ps-3" href="/">Jaxon DbAdmin Demo</a>
-    </nav>
-<?php $this->endblock() ?>
-
 <?php $this->block('htmlHeader') ?>
 <?php
 echo $jaxon->getCss(), "\n";

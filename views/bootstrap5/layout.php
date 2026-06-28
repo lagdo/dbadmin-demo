@@ -30,10 +30,6 @@
     <?= $this->htmlHeader ?>
   </head>
   <body>
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-primary">
-      <?= $this->pageHeader ?>
-    </nav>
-
     <div id="layoutSidenav">
       <div id="layoutSidenav_content">
         <main>
@@ -41,20 +37,6 @@
         </main>
       </div>
     </div>
-
-    <footer class="py-4 bg-light mt-auto">
-      <div class="container-fluid px-4">
-        <div class="d-flex align-items-center justify-content-between small">
-          <div class="text-muted">Copyright &copy; Your Website 2023</div>
-          <div>
-            <a href="#">Privacy Policy</a>
-            &middot;
-            <a href="#">Terms &amp; Conditions</a>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </body>
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
