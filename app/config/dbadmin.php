@@ -78,9 +78,17 @@ return [
                         {
                             return env('DBADMIN_USER', '');
                         }
+                        public function name(): string
+                        {
+                            return env('DBADMIN_NAME', '');
+                        }
                         public function role(): string
                         {
                             return env('DBADMIN_ROLE', '');
+                        }
+                        public function logout(): string
+                        {
+                            return '/logout';
                         }
                     },
             ],
