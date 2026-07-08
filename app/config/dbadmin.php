@@ -14,7 +14,7 @@ $baseDir = base_dir();
 
 function getExportStorage(): Filesystem
 {
-    // Make a Filesystem object with the storage.exports options.
+    // Make a Filesystem object with the storage.stores.exports options.
     return storage()->get('exports');
 }
 
@@ -151,7 +151,7 @@ return [
                         'lib' => 'butterup',
                     ],
                     'query' => [
-                        'editor' => 'cm', // 'cm' for CodeMirror or 'ace' for Ace Editor.
+                        'editor' => 'ace', // 'cm' for CodeMirror or 'ace' for Ace Editor.
                     ],
                 ],
                 'provider' => function(array $options, Container $di) {
@@ -218,6 +218,8 @@ return [
                         'name' => 'chinook.db',
                     ],
                 ],
+                // The SQL SELECT clauses to get labels for foreign key columns.
+                'foreigns' => include  __DIR__ . '/foreigns.php',
             ],
         ],
     ],
@@ -235,7 +237,7 @@ return [
         ],
         'js' => [
             'lib' => [
-                // 'uri' => '',
+                'uri' => '/jaxon',
             ],
         ],
     ],
