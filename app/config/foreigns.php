@@ -8,15 +8,14 @@ return [
                 'actor' => [
                     'actor_id' => [
                         'select' => fn(int $textLength) => "SUBSTR(CONCAT(first_name, ' ', last_name), 1, $textLength)",
-                        'filter' => fn(string $search) => "\"first_name\" ILIKE $search OR \"last_name\" ILIKE $search",
+                        'search' => fn(string $search) => "\"first_name\" ILIKE $search OR \"last_name\" ILIKE $search",
                     ],
                 ],
                 'store' => [
                     'store_id' => [
-                        'select' => fn(int $textLength) => "(SELECT SUBSTR(a.address, 1, $textLength) " .
-                            "FROM address a WHERE store.address_id=a.address_id)",
-                        'filter' => fn(string $search) => "EXISTS (SELECT address_id FROM address a " .
-                            "WHERE store.address_id=a.address_id AND a.address ILIKE $search)",
+                        'select' => fn(int $textLength) => "SUBSTR(address.address, 1, $textLength)",
+                        'search' => fn(string $search) => "address.address ILIKE $search",
+                        'joins' => ["INNER JOIN address ON store.address_id=address.address_id"],
                     ],
                 ],
             ],
@@ -27,15 +26,14 @@ return [
             'actor' => [
                 'actor_id' => [
                     'select' => fn(int $textLength) => "SUBSTR(CONCAT(first_name, ' ', last_name), 1, $textLength)",
-                    'filter' => fn(string $search) => "LOWER(first_name) LIKE $search OR LOWER(last_name) LIKE $search",
+                    'search' => fn(string $search) => "LOWER(first_name) LIKE $search OR LOWER(last_name) LIKE $search",
                 ],
             ],
             'store' => [
                 'store_id' => [
-                    'select' => fn(int $textLength) => "(SELECT SUBSTR(a.address, 1, $textLength) " .
-                        "FROM address a WHERE store.address_id=a.address_id)",
-                    'filter' => fn(string $search) => "EXISTS (SELECT address_id FROM address a " .
-                        "WHERE store.address_id=a.address_id AND LOWER(a.address) LIKE $search)",
+                    'select' => fn(int $textLength) => "SUBSTR(address.address, 1, $textLength)",
+                    'search' => fn(string $search) => "LOWER(address.address) LIKE $search",
+                    'joins' => ["INNER JOIN address ON store.address_id=address.address_id"],
                 ],
             ],
         ],
@@ -45,15 +43,14 @@ return [
             'actor' => [
                 'actor_id' => [
                     'select' => fn(int $textLength) => "SUBSTR(CONCAT(first_name, ' ', last_name), 1, $textLength)",
-                    'filter' => fn(string $search) => "LOWER(first_name) LIKE $search OR LOWER(last_name) LIKE $search",
+                    'search' => fn(string $search) => "LOWER(first_name) LIKE $search OR LOWER(last_name) LIKE $search",
                 ],
             ],
             'store' => [
                 'store_id' => [
-                    'select' => fn(int $textLength) => "(SELECT SUBSTR(a.address, 1, $textLength) " .
-                        "FROM address a WHERE store.address_id=a.address_id)",
-                    'filter' => fn(string $search) => "EXISTS (SELECT address_id FROM address a " .
-                        "WHERE store.address_id=a.address_id AND LOWER(a.address) LIKE $search)",
+                    'select' => fn(int $textLength) => "SUBSTR(address.address, 1, $textLength)",
+                    'search' => fn(string $search) => "LOWER(address.address) LIKE $search",
+                    'joins' => ["INNER JOIN address ON store.address_id=address.address_id"],
                 ],
             ],
         ],
