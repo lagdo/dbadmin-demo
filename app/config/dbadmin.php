@@ -161,7 +161,7 @@ return [
                 },
                 'reader' => [
                     'server' => Provider\Config\ServerConfigProvider::class,
-                    'access' => Provider\Secret\AwsSecretConfigProvider::class,
+                    'secret' => Provider\Secret\AwsSecretConfigProvider::class,
                 ],
                 'export' => [
                     'writer' => function(string $content, string $filename): string {
