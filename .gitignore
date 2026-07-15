@@ -1,9 +1,11 @@
 composer.lock
 .env
+node_modules/
+cache/
+public/assets
 /gcp/
 /vendor/
 /build/
-/public/jaxon/
 /.idea/
 /logs/*log
 /exports/
