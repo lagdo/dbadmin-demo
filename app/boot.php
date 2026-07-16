@@ -1,24 +1,25 @@
 <?php
 
 require_once __DIR__ . '/lib.php';
+require dirname(__DIR__, 2) . '/vendor/autoload.php';
 
 use Lagdo\DbAdmin\App\Ajax\Exception\AppException;
 use Lagdo\DbAdmin\App\Ajax\Exception\ValidationException;
 use Lagdo\Facades\ContainerWrapper;
 use Lagdo\Facades\Logger;
 
-require dirname(__DIR__, 2) . '/vendor/autoload.php';
-
 $dotenv = Dotenv\Dotenv::createUnsafeImmutable(base_dir());
 $dotenv->load();
 
 $dialog = jaxon()->getResponse()->dialog();
-$warningHandler = fn(Exception $e) => $dialog->title('Warning')->warning($e->getMessage());
-$errorHandler = fn(Exception $e) => $dialog->title('Error')->error($e->getMessage());
-
-jaxon()->callback()->error($warningHandler, AppException::class);
-jaxon()->callback()->error($errorHandler, ValidationException::class);
-jaxon()->callback()->error($errorHandler);
+$warningHandler = fn(Exception $e) =>
+    $dialog->title('Warning')->warning($e->getMessage());
+$errorHandler = fn(Exception $e) =>
+    $dialog->title('Error')->error($e->getMessage());
+jaxon()->callback()
+    ->error($warningHandler, AppException::class)
+    ->error($errorHandler, ValidationException::class)
+    ->error($errorHandler);
 
 ContainerWrapper::registerLocalServices([
     'filename' => base_dir() . '/logs/' . page(),

@@ -1,6 +1,5 @@
 composer.lock
 .env
-node_modules/
 cache/
 public/assets
 /gcp/
