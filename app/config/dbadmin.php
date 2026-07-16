@@ -1,5 +1,7 @@
 <?php
 
+require_once dirname(__DIR__) . '/lib.php';
+
 use Jaxon\Di\Container;
 use Lagdo\DbAdmin\App\DbAdminPackage;
 use Lagdo\DbAdmin\Support\Provider;
@@ -151,8 +153,11 @@ return [
                         'lib' => 'butterup',
                     ],
                     'query' => [
-                        'editor' => 'ace', // 'cm' for CodeMirror or 'ace' for Ace Editor.
+                        'editor' => 'cm', // 'cm' for CodeMirror or 'ace' for Ace Editor.
                     ],
+                ],
+                'assets' => [
+                    'url' => '/assets',
                 ],
                 'provider' => function(array $options, Container $di) {
                     $cfgFilePath = __DIR__ . '/servers.php';
@@ -237,7 +242,7 @@ return [
         ],
         'js' => [
             'lib' => [
-                'uri' => '/jaxon',
+                'uri' => '/assets/jaxon',
             ],
         ],
     ],

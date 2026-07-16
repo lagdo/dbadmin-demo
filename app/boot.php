@@ -1,19 +1,11 @@
 <?php
 
+require_once __DIR__ . '/lib.php';
+
 use Lagdo\DbAdmin\App\Ajax\Exception\AppException;
 use Lagdo\DbAdmin\App\Ajax\Exception\ValidationException;
 use Lagdo\Facades\ContainerWrapper;
 use Lagdo\Facades\Logger;
-
-function page(): string
-{
-    return ($_GET['page'] ?? '') === 'audit' ? 'dbaudit' : 'dbadmin';
-}
-
-function base_dir(): string
-{
-    return dirname(__DIR__);
-}
 
 require dirname(__DIR__, 2) . '/vendor/autoload.php';
 

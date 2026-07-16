@@ -1,6 +1,6 @@
 <?php
 
-require dirname(__DIR__) . '/app/boot.php';
+require_once dirname(__DIR__) . '/app/boot.php';
 
 // Set the content type
 header('Content-Type: text/plain');

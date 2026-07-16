@@ -1,5 +1,7 @@
 <?php
 
+require_once dirname(__DIR__) . '/lib.php';
+
 use Lagdo\DbAdmin\App\DbAuditPackage;
 
 $baseDir = base_dir();
@@ -64,7 +66,7 @@ return [
         ],
         'js' => [
             'lib' => [
-                // 'uri' => '',
+                'uri' => '/assets/jaxon',
             ],
         ],
     ],
