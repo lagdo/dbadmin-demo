@@ -5,6 +5,7 @@ require dirname(__DIR__, 2) . '/vendor/autoload.php';
 
 use Lagdo\DbAdmin\App\Ajax\Exception\AppException;
 use Lagdo\DbAdmin\App\Ajax\Exception\ValidationException;
+use Lagdo\DbAdmin\Driver\Exception\DriverException;
 use Lagdo\Facades\ContainerWrapper;
 use Lagdo\Facades\Logger;
 
@@ -18,6 +19,7 @@ $errorHandler = fn(Exception $e) =>
     $dialog->title('Error')->error($e->getMessage());
 jaxon()->callback()
     ->error($warningHandler, AppException::class)
+    ->error($errorHandler, DriverException::class)
     ->error($errorHandler, ValidationException::class)
     ->error($errorHandler);
 

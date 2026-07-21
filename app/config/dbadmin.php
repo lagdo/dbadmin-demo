@@ -13,6 +13,8 @@ use League\Flysystem\UnableToWriteFile;
 use function Jaxon\storage;
 
 $baseDir = base_dir();
+$secrets = include  __DIR__ . '/secrets.php';
+$foreigns = include  __DIR__ . '/foreigns.php';
 
 function getExportStorage(): Filesystem
 {
@@ -23,27 +25,6 @@ function getExportStorage(): Filesystem
 function getExportPath(string $filename): string
 {
     return "users/$filename";
-}
-
-function getInfisicalSecretKey(string $prefix, string $option, Provider\AuthInterface $auth): string
-{
-    return "users.{$prefix}.{$option}";
-}
-
-function getAwsSecretSecretKey(string $prefix, Provider\AuthInterface $auth): string
-{
-    return "users.{$prefix}";
-}
-
-function getGcpSecretSecretKey(string $prefix, string $option, Provider\AuthInterface $auth): string
-{
-    return "db.users.{$prefix}.{$option}";
-}
-
-function getOpenBaoSecretKey(string $prefix, string $option, Provider\AuthInterface $auth): string
-{
-    // The key is prefixed with "data/", for the KV2 API.
-    return "data/db.users.{$prefix}.{$option}";
 }
 
 if (!function_exists('env'))
@@ -74,40 +55,9 @@ return [
         ],
         'container' => [
             'set' => [
-                Provider\AuthInterface::class =>
-                    fn() => new class implements Provider\AuthInterface {
-                        public function user(): string
-                        {
-                            return env('DBADMIN_USER', '');
-                        }
-                        public function name(): string
-                        {
-                            return env('DBADMIN_NAME', '');
-                        }
-                        public function role(): string
-                        {
-                            return env('DBADMIN_ROLE', '');
-                        }
-                        public function logout(): string
-                        {
-                            return '/logout';
-                        }
-                    },
+                Provider\AuthInterface::class => $secrets['auth'],
             ],
-            'extend' => [
-                Provider\Secret\InfisicalConfigProvider::class =>
-                    fn(Provider\Secret\InfisicalConfigProvider $provider) =>
-                        $provider->setSecretKeyBuilder(getInfisicalSecretKey(...)),
-                Provider\Secret\AwsSecretConfigProvider::class =>
-                    fn(Provider\Secret\AwsSecretConfigProvider $provider) =>
-                        $provider->setSecretKeyBuilder(getAwsSecretSecretKey(...)),
-                Provider\Secret\GcpSecretConfigProvider::class =>
-                    fn(Provider\Secret\GcpSecretConfigProvider $provider) =>
-                        $provider->setSecretKeyBuilder(getGcpSecretSecretKey(...)),
-                Provider\Secret\OpenBaoConfigProvider::class =>
-                    fn(Provider\Secret\OpenBaoConfigProvider $provider) =>
-                        $provider->setSecretKeyBuilder(getOpenBaoSecretKey(...)),
-            ],
+            'extend' => $secrets['container']['extend'],
         ],
         'assets' => [
             'export' => false,
@@ -166,7 +116,7 @@ return [
                 },
                 'reader' => [
                     'server' => Provider\Config\ServerConfigProvider::class,
-                    'secret' => Provider\Secret\AwsSecretConfigProvider::class,
+                    'secret' => $secrets['reader'],
                 ],
                 'export' => [
                     'writer' => function(string $content, string $filename): string {
@@ -224,7 +174,7 @@ return [
                     ],
                 ],
                 // The SQL SELECT clauses to get labels for foreign key columns.
-                'foreigns' => include  __DIR__ . '/foreigns.php',
+                'foreigns' => $foreigns,
             ],
         ],
     ],
