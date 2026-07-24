@@ -9,8 +9,9 @@ use Lagdo\DbAdmin\Driver\Exception\DriverException;
 use Lagdo\Facades\ContainerWrapper;
 use Lagdo\Facades\Logger;
 
-$dotenv = Dotenv\Dotenv::createUnsafeImmutable(base_dir());
-$dotenv->load();
+$baseDir = base_dir();
+Dotenv\Dotenv::createImmutable($baseDir)->safeLoad();
+Dotenv\Dotenv::createImmutable($baseDir, '.env.dbadmin')->safeLoad();
 
 $dialog = jaxon()->getResponse()->dialog();
 $warningHandler = fn(Exception $e) =>
@@ -24,7 +25,7 @@ jaxon()->callback()
     ->error($errorHandler);
 
 ContainerWrapper::registerLocalServices([
-    'filename' => base_dir() . '/logs/' . page(),
+    'filename' => "$baseDir/logs/" . page(),
 ]);
 jaxon()->di()->setLogger(Logger::instance());
 

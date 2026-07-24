@@ -11,43 +11,43 @@ return [
         'default' => 'dbadmin-pgsql-14',
         'servers' => [
             // The database servers
-            'dbadmin-pgsql-14' => [ // A unique identifier for this server
+            'dbadmin-pgsql-14' => [
                 'driver' => 'pgsql',
-                'name' => 'PostgreSQL 14',     // The name to be displayed in the dashboard UI.
-                'host' => 'pgsql.addr',  // The database host name or address.
-                'port' => 5433,      // The database port. Optional.
-                // 'username' => 'postgres', // The database user credentials.
-                // 'password' => 'dbadmin', // The database user credentials.
+                'name' => 'PostgreSQL 14',
+                'host' => env('PGSQL14_DB_HOST'),
+                'port' => env('PGSQL14_DB_PORT'),
+                'username' => env('PGSQL14_DB_USERNAME'),
+                'password' => env('PGSQL14_DB_PASSWORD'),
             ],
-            'dbadmin-pgsql-17' => [ // A unique identifier for this server
+            'dbadmin-pgsql-17' => [
                 'driver' => 'pgsql',
-                'name' => 'PostgreSQL 17',     // The name to be displayed in the dashboard UI.
-                'host' => 'pgsql.addr',  // The database host name or address.
-                'port' => 5434,      // The database port. Optional.
-                // 'username' => 'postgres', // The database user credentials.
-                // 'password' => 'dbadmin', // The database user credentials.
+                'name' => 'PostgreSQL 17',
+                'host' => env('PGSQL17_DB_HOST'),
+                'port' => env('PGSQL17_DB_PORT'),
+                'username' => env('PGSQL17_DB_USERNAME'),
+                'password' => env('PGSQL17_DB_PASSWORD'),
             ],
-            'dbadmin-mariadb' => [ // A unique identifier for this server
+            'dbadmin-mariadb' => [
                 'driver' => 'mysql',
                 // 'prefer_pdo' => true,
-                'name' => 'MariaDB 10',     // The name to be displayed in the dashboard UI.
-                'host' => 'maria.addr',     // The database host name or address.
-                'port' => 3307,      // The database port. Optional.
-                // 'username' => 'root', // The database user credentials.
-                // 'password' => 'dbadmin', // The database user credentials.
+                'name' => 'MariaDB 10',
+                'host' => env('MARIA_DB_HOST'),
+                'port' => env('MARIA_DB_PORT'),
+                'username' => env('MARIA_DB_USERNAME'),
+                'password' => env('MARIA_DB_PASSWORD'),
             ],
-            'dbadmin-mysql' => [ // A unique identifier for this server
+            'dbadmin-mysql' => [
                 'driver' => 'mysql',
-                'name' => 'MySQL 8',     // The name to be displayed in the dashboard UI.
-                'host' => 'mysql.addr',     // The database host name or address.
-                'port' => 3308,      // The database port. Optional.
-                // 'username' => 'root', // The database user credentials.
-                // 'password' => 'dbadmin', // The database user credentials.
+                'name' => 'MySQL 8',
+                'host' => env('MYSQL_DB_HOST'),
+                'port' => env('MYSQL_DB_PORT'),
+                'username' => env('MYSQL_DB_USERNAME'),
+                'password' => env('MYSQL_DB_PASSWORD'),
             ],
-            'dbadmin-sqlite3' => [ // A unique identifier for this server/var/www
+            'dbadmin-sqlite3' => [
                 'driver' => 'sqlite',
-                'name' => 'Sqlite 3',     // The name to be displayed in the dashboard UI.
-                'directory' => '/var/lib/sqlite/3', // The directory containing the database files.
+                'name' => 'Sqlite 3',
+                'directory' => '/var/lib/sqlite/3',
             ],
         ],
     ],

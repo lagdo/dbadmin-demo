@@ -31,7 +31,7 @@ if (!function_exists('env'))
 {
     function env(string $name, mixed $default = null): mixed
     {
-        return getenv($name) ?: $default;
+        return $_ENV[$name] ?: $default;
     }
 }
 
@@ -116,7 +116,7 @@ return [
                 },
                 'reader' => [
                     'server' => Provider\Config\ServerConfigProvider::class,
-                    'secret' => $secrets['reader'],
+                    'secret' => $secrets['reader'] ?? Provider\Secret\SecretConfigProvider::class,
                 ],
                 'export' => [
                     'writer' => function(string $content, string $filename): string {
