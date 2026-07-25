@@ -47,7 +47,7 @@ return [
             return '/logout';
         }
     },
-    'reader' => AwsSecretConfigProvider::class,
+    // 'reader' => InfisicalConfigProvider::class,
     'container' => [
         'extend' => [
             InfisicalConfigProvider::class => fn(InfisicalConfigProvider $provider) =>
