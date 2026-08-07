@@ -2,8 +2,6 @@
 
 require_once dirname(__DIR__) . '/lib.php';
 
-use Lagdo\DbAdmin\App\DbAuditPackage;
-
 $baseDir = base_dir();
 
 return [
@@ -11,7 +9,7 @@ return [
         'metadata' => [
             'cache' => [
                 'enabled' => false,
-                'dir' => "$baseDir/cache/dbaudit/attributes",
+                'dir' => "$baseDir/cache/attributes",
             ],
         ],
         'ui' => [
@@ -27,28 +25,38 @@ return [
         'assets' => [
             'export' => false,
             'minify' => false,
-            'uri' => '/jaxon/audit',
-            'dir' => "$baseDir/public/jaxon/audit",
+            'uri' => '/jaxon/app-0.9.0',
+            'dir' => "$baseDir/public/jaxon/app-0.9.0",
             // 'file' => '',
-        ],
-        'packages' => [
-            DbAuditPackage::class => [
-                'audit' => [
-                    'enabled' => true,
-                ],
-                'database' => [
-                    // Same as the "servers" items, but "name" is the database name.
-                    'driver' => 'sqlite',
-                    'directory' => '/var/lib/sqlite/3',
-                    'name' => 'chinook.db',
-                ],
-            ],
         ],
         'dialogs' => [
             'default' => [
                 'modal' => 'bootbox',
                 'alert' => 'sweetalert',
                 'confirm' => 'sweetalert',
+            ],
+            'lib' => [
+                'use' => ['butterup'],
+            ],
+        ],
+        'storage' => [
+            'stores' => [
+                'uploads' => [
+                    'adapter' => 'local',
+                    'dir' => "$baseDir/uploads",
+                ],
+                'exports' => [
+                    'adapter' => 'local',
+                    'dir' => "$baseDir/exports",
+                ],
+            ],
+        ],
+        'upload' => [
+            'enabled' => true,
+            'files' => [
+                'sql_files' => [
+                    'storage' => 'uploads',
+                ],
             ],
         ],
     ],
@@ -57,16 +65,16 @@ return [
             'debug' => [
                 'on' => false,
             ],
-            'request' => [
-                'uri' => 'ajax.php?page=audit',
-            ],
+            // 'request' => [
+            //     'uri' => '',
+            // ],
             'prefix' => [
                 'class' => '',
             ],
         ],
         'js' => [
             'lib' => [
-                'uri' => '/assets/jaxon',
+                'uri' => '/jaxon/lib-5.2.5',
             ],
         ],
     ],

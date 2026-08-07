@@ -1,7 +1,8 @@
 composer.lock
 .env*
 cache/
-public/assets
+public/dbadmin/
+public/jaxon/
 /gcp/
 /vendor/
 /build/
