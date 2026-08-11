@@ -20,8 +20,9 @@ return [
         ],
         'audit' => [
             'enabled' => true,
-            'allowed' => [
+            'users' => [
                 // The emails of users that are allowed to access the audit page.
+                'admin@company.com',
             ],
         ],
         'views' => [

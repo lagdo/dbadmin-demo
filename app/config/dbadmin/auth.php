@@ -17,6 +17,10 @@ return fn() => new class implements AuthInterface {
     {
         return [];
     }
+    public function audit(): string
+    {
+        return '/?page=audit';
+    }
     public function logout(): string
     {
         return '/logout';
