@@ -13,9 +13,9 @@ return fn() => new class implements AuthInterface {
     {
         return env('DBADMIN_NAME', '');
     }
-    public function role(): string
+    public function roles(): array
     {
-        return env('DBADMIN_ROLE', '');
+        return [];
     }
     public function logout(): string
     {
