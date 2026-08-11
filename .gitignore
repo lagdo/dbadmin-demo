@@ -10,3 +10,6 @@ public/jaxon/
 /logs/*log
 /exports/
 /uploads/
+/views/daisyui/
+/views/flowbite/
+/views/preline/
