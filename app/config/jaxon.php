@@ -12,8 +12,17 @@ return [
                 'dir' => "$baseDir/cache/attributes",
             ],
         ],
-        'ui' => [
-            'template' => 'bootstrap5',
+        'template' => [
+            'name' => 'bootstrap5',
+            'assets' => [
+                'url' => '/dbadmin',
+            ],
+        ],
+        'audit' => [
+            'enabled' => true,
+            'allowed' => [
+                // The emails of users that are allowed to access the audit page.
+            ],
         ],
         'views' => [
             'tpl' => [
