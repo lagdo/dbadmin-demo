@@ -1,42 +1,43 @@
 <?php
 
+use Lagdo\DbAdmin\Support\Provider\Facade\Auth;
 use Lagdo\DbAdmin\Support\Provider\Secret\AwsSecretConfigProvider;
 use Lagdo\DbAdmin\Support\Provider\Secret\GcpSecretConfigProvider;
 use Lagdo\DbAdmin\Support\Provider\Secret\InfisicalConfigProvider;
 use Lagdo\DbAdmin\Support\Provider\Secret\OpenBaoConfigProvider;
 
-function getInfisicalSecretKey(string $prefix, string $option): string
-{
+$keyBuilderForInfisical = function(string $prefix, string $option): string {
+    // $username = Auth::user(); // Use this to customize the key.
     return "users.{$prefix}.{$option}";
-}
+};
 
-function getAwsSecretSecretKey(string $prefix): string
-{
+$keyBuilderForAwsSecret = function(string $prefix): string {
+    // $username = Auth::user(); // Use this to customize the key.
     // User names and passwords are stored in the same entries.
     return "users.{$prefix}";
-}
+};
 
-function getGcpSecretSecretKey(string $prefix, string $option): string
-{
+$keyBuilderForGcpSecret = function(string $prefix, string $option): string {
+    // $username = Auth::user(); // Use this to customize the key.
     return "db.users.{$prefix}.{$option}";
-}
+};
 
-function getOpenBaoSecretKey(string $prefix, string $option): string
-{
+$keyBuilderForOpenBao = function(string $prefix, string $option): string {
+    // $username = Auth::user(); // Use this to customize the key.
     // The key is prefixed with "data/", for the KV2 API.
     return "data/db.users.{$prefix}.{$option}";
-}
+};
 
 // Uncomment the secret manager in use.
 // Comment all if using no secret manager.
 
 return [
     'reader' => InfisicalConfigProvider::class,
-    'key' => getInfisicalSecretKey(...),
+    'key' => $keyBuilderForInfisical,
     // 'reader' => AwsSecretConfigProvider::class,
-    // 'key' => getAwsSecretSecretKey(...),
+    // 'key' => $keyBuilderForAwsSecret,
     // 'reader' => GcpSecretConfigProvider::class,
-    // 'key' => getGcpSecretSecretKey(...),
+    // 'key' => $keyBuilderForGcpSecret,
     // 'reader' => OpenBaoConfigProvider::class,
-    // 'key' => getOpenBaoSecretKey(...),
+    // 'key' => $keyBuilderForOpenBao,
 ];

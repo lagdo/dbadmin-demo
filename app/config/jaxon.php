@@ -74,6 +74,7 @@ return [
         'core' => [
             'debug' => [
                 'on' => false,
+                'verbose' => false,
             ],
             // 'request' => [
             //     'uri' => '',

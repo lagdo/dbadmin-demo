@@ -49,54 +49,6 @@ return [
                 'name' => 'Sqlite 3',
                 'directory' => '/var/lib/sqlite/3',
             ],
-            'tontine' => [
-                'driver' => 'pgsql',
-                'name' => 'Tontine',
-                'host' => 'pgsql.addr',
-                'port' => 5432,
-                // Database options
-                'access' => [
-                    'server' => false,
-                    'databases' => ['tontine'],
-                    'schemas' => ['public'],
-                ],
-            ],
-            'connect' => [
-                'driver' => 'pgsql',
-                'name' => 'Connect',
-                'host' => 'pgsql.addr',
-                'port' => 5432,
-                // Database options
-                'access' => [
-                    'server' => false,
-                    'databases' => ['connect'],
-                    'schemas' => ['tontine', 'invoice', /*'publish'*/],
-                ],
-            ],
-            'invoice' => [
-                'driver' => 'pgsql',
-                'name' => 'Invoice',
-                'host' => 'pgsql.addr',
-                'port' => 5432,
-                // Database options
-                'access' => [
-                    'server' => false,
-                    'databases' => ['invoice'],
-                    'schemas' => ['public'],
-                ],
-            ],
-            'payment' => [
-                'driver' => 'pgsql',
-                'name' => 'Payment',
-                'host' => 'pgsql.addr',
-                'port' => 5432,
-                // Database options
-                'access' => [
-                    'server' => false,
-                    'databases' => ['payment'],
-                    'schemas' => ['public'],
-                ],
-            ],
         ],
     ],
 ];
