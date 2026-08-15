@@ -2,10 +2,10 @@
 
 require_once dirname(__DIR__) . '/app/boot.php';
 
+use Lagdo\DbAdmin\Support\Facade\FileSystem;
+
 // Set the content type
 header('Content-Type: text/plain');
 
-$package = jaxon()->package(Lagdo\DbAdmin\App\DbAdminPackage::class);
-$reader = $package->getOption('export.reader');
-
-echo !is_callable($reader) ? "No export reader set." : $reader($_GET['file'] ?? '');
+$fs = FileSystem::instance();
+echo !$fs ? "No export reader set." : $fs->read($_GET['file'] ?? '');

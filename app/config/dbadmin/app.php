@@ -1,6 +1,7 @@
 <?php
 
 use Lagdo\DbAdmin\Support\Provider\AuthInterface;
+use Lagdo\DbAdmin\Support\Service\Export\AbstractFileSystem;
 
 return [
     'admin' => [
@@ -34,6 +35,25 @@ return [
         public function logout(): string
         {
             return '/logout';
+        }
+    },
+    // 'export' => null, // No export.
+    'export' => fn() => new class extends AbstractFileSystem {
+        protected function storage(): string
+        {
+            return 'exports';
+        }
+        protected function url(string $filename): string
+        {
+            return "/export.php?file=$filename";
+        }
+        protected function slug(string $userId): string
+        {
+            return ''; // Not used
+        }
+        protected function path(string $filename): string
+        {
+            return "users/$filename";
         }
     },
 ];
