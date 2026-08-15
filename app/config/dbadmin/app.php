@@ -1,7 +1,13 @@
 <?php
 
+use Lagdo\DbAdmin\Support\Facade\Auth;
 use Lagdo\DbAdmin\Support\Provider\AuthInterface;
 use Lagdo\DbAdmin\Support\Service\Export\AbstractFileSystem;
+use Lagdo\DbAdmin\Support\Provider\Secret\AwsSecretConfigProvider;
+use Lagdo\DbAdmin\Support\Provider\Secret\GcpSecretConfigProvider;
+use Lagdo\DbAdmin\Support\Provider\Secret\InfisicalConfigProvider;
+use Lagdo\DbAdmin\Support\Provider\Secret\KeyBuilderInterface;
+use Lagdo\DbAdmin\Support\Provider\Secret\OpenBaoConfigProvider;
 
 return [
     'admin' => [
@@ -88,4 +94,41 @@ return [
             return "users/$filename";
         }
     },
+    // Comment all to use the default secret config provider.
+    'secret' => [
+        'reader' => InfisicalConfigProvider::class,
+        'key' => fn() => new class implements KeyBuilderInterface {
+            public function build(string $prefix, string $option = ''): string
+            {
+                // $username = Auth::userId(); // Use this to customize the key.
+                return "users.{$prefix}.{$option}";
+            }
+        },
+        // 'reader' => AwsSecretConfigProvider::class,
+        // 'key' => fn() => new class implements KeyBuilderInterface {
+        //     public function build(string $prefix, string $option = ''): string
+        //     {
+        //         // $username = Auth::userId(); // Use this to customize the key.
+        //         // User names and passwords are stored in the same entries.
+        //         return "users.{$prefix}";
+        //     }
+        // },
+        // 'reader' => GcpSecretConfigProvider::class,
+        // 'key' => fn() => new class implements KeyBuilderInterface {
+        //     public function build(string $prefix, string $option = ''): string
+        //     {
+        //         // $username = Auth::userId(); // Use this to customize the key.
+        //         return "db.users.{$prefix}.{$option}";
+        //     }
+        // },
+        // 'reader' => OpenBaoConfigProvider::class,
+        // 'key' => fn() => new class implements KeyBuilderInterface {
+        //     public function build(string $prefix, string $option = ''): string
+        //     {
+        //         // $username = Auth::userId(); // Use this to customize the key.
+        //         // The key is prefixed with "data/", for the KV2 API.
+        //         return "data/db.users.{$prefix}.{$option}";
+        //     }
+        // },
+    ],
 ];
