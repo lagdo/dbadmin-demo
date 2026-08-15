@@ -31,7 +31,7 @@ return [
                 'favorite' => true,
             ],
             'history' => [
-                'distinct' => true,
+                'distinct' => false,
                 'limit' => 10,
             ],
             'favorite' => [
@@ -40,13 +40,19 @@ return [
         ],
     ],
     'audit' => [
-        'database' => [
-            // Same as the "servers" items, but "name" is the database name.
-            'driver' => 'sqlite',
-            'directory' => '/var/lib/sqlite/3',
-            'name' => 'chinook.db',
-        ],
         'queries' => [
+            'database' => [
+                // Same as the "servers" items, but "name" is the database name.
+                // 'driver' => 'sqlite',
+                // 'directory' => '/var/lib/sqlite/3',
+                // 'name' => 'chinook.db',
+                'driver' => 'pgsql',
+                'host' => env('PGSQL17_DB_HOST'),
+                'port' => env('PGSQL17_DB_PORT'),
+                // 'username' => env('PGSQL17_DB_USERNAME'),
+                // 'password' => env('PGSQL17_DB_PASSWORD'),
+                'name' => 'auditdb',
+            ],
             'pagination' => [
                 'limit' => 10,
             ],
