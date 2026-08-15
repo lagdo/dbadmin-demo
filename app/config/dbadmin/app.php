@@ -13,6 +13,38 @@ return [
                 'editor' => 'cm', // 'cm' for CodeMirror or 'ace' for Ace Editor.
             ],
         ],
+        'queries' => [
+            'save' => [
+                'editor' => true,
+                'builder' => true,
+                'library' => false,
+            ],
+            'enable' => [
+                'preferences' => true,
+                'history' => true,
+                'favorite' => true,
+            ],
+            'history' => [
+                'distinct' => true,
+                'limit' => 10,
+            ],
+            'favorite' => [
+                'limit' => 10,
+            ],
+        ],
+    ],
+    'audit' => [
+        'database' => [
+            // Same as the "servers" items, but "name" is the database name.
+            'driver' => 'sqlite',
+            'directory' => '/var/lib/sqlite/3',
+            'name' => 'chinook.db',
+        ],
+        'queries' => [
+            'pagination' => [
+                'limit' => 10,
+            ],
+        ],
     ],
     // 'auth' => null, // No auth.
     'auth' => fn() => new class implements AuthInterface {
