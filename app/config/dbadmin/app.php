@@ -16,7 +16,8 @@ return [
                 'lib' => 'butterup',
             ],
             'query' => [
-                'editor' => 'cm', // 'cm' for CodeMirror or 'ace' for Ace Editor.
+                // 'cm' for CodeMirror or 'ace' for Ace Editor.
+                'editor' => 'cm',
             ],
         ],
         'queries' => [
@@ -40,18 +41,23 @@ return [
         ],
     ],
     'audit' => [
+        'enabled' => true,
+        'users' => [
+            // The emails of users that are allowed to access the audit page.
+            'admin@company.com',
+        ],
         'queries' => [
             'database' => [
                 // Same as the "servers" items, but "name" is the database name.
-                // 'driver' => 'sqlite',
-                // 'directory' => '/var/lib/sqlite/3',
-                // 'name' => 'chinook.db',
-                'driver' => 'pgsql',
-                'host' => env('PGSQL17_DB_HOST'),
-                'port' => env('PGSQL17_DB_PORT'),
+                'driver' => 'sqlite',
+                'name' => 'chinook.db',
+                'directory' => '/var/lib/sqlite/3',
+                // 'driver' => 'pgsql',
+                // 'name' => 'auditdb',
+                // 'host' => env('PGSQL17_DB_HOST'),
+                // 'port' => env('PGSQL17_DB_PORT'),
                 // 'username' => env('PGSQL17_DB_USERNAME'),
                 // 'password' => env('PGSQL17_DB_PASSWORD'),
-                'name' => 'auditdb',
             ],
             'pagination' => [
                 'limit' => 10,
