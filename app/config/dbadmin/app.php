@@ -1,13 +1,8 @@
 <?php
 
 use Lagdo\DbAdmin\Support\Facade\Auth;
-use Lagdo\DbAdmin\Support\Provider\AuthInterface;
-use Lagdo\DbAdmin\Support\Service\Export\AbstractFileSystem;
-use Lagdo\DbAdmin\Support\Provider\Secret\AwsSecretConfigProvider;
-use Lagdo\DbAdmin\Support\Provider\Secret\GcpSecretConfigProvider;
-use Lagdo\DbAdmin\Support\Provider\Secret\InfisicalConfigProvider;
-use Lagdo\DbAdmin\Support\Provider\Secret\KeyBuilderInterface;
-use Lagdo\DbAdmin\Support\Provider\Secret\OpenBaoConfigProvider;
+use Lagdo\DbAdmin\Support\Provider;
+use Lagdo\DbAdmin\Support\Service;
 
 return [
     'admin' => [
@@ -22,14 +17,14 @@ return [
         ],
         'queries' => [
             'save' => [
-                'editor' => true,
-                'builder' => true,
+                'editor' => false,
+                'builder' => false,
                 'library' => false,
             ],
             'enable' => [
-                'preferences' => true,
-                'history' => true,
-                'favorite' => true,
+                'preferences' => false,
+                'history' => false,
+                'favorite' => false,
             ],
             'history' => [
                 'distinct' => false,
@@ -41,23 +36,13 @@ return [
         ],
     ],
     'audit' => [
-        'enabled' => true,
+        'enabled' => false,
         'users' => [
             // The emails of users that are allowed to access the audit page.
-            'admin@company.com',
         ],
         'queries' => [
             'database' => [
                 // Same as the "servers" items, but "name" is the database name.
-                'driver' => 'sqlite',
-                'name' => 'chinook.db',
-                'directory' => '/var/lib/sqlite/3',
-                // 'driver' => 'pgsql',
-                // 'name' => 'auditdb',
-                // 'host' => env('PGSQL17_DB_HOST'),
-                // 'port' => env('PGSQL17_DB_PORT'),
-                // 'username' => env('PGSQL17_DB_USERNAME'),
-                // 'password' => env('PGSQL17_DB_PASSWORD'),
             ],
             'pagination' => [
                 'limit' => 10,
@@ -65,7 +50,7 @@ return [
         ],
     ],
     // 'auth' => null, // No auth.
-    'auth' => fn() => new class implements AuthInterface {
+    'auth' => fn() => new class implements Provider\AuthInterface {
         public function userId(): string
         {
             return env('DBADMIN_USER', '');
@@ -88,7 +73,7 @@ return [
         }
     },
     // 'export' => null, // No export.
-    'export' => fn() => new class extends AbstractFileSystem {
+    'export' => fn() => new class extends Service\Export\AbstractFileSystem {
         protected function storage(): string
         {
             return 'exports';
@@ -97,27 +82,23 @@ return [
         {
             return "/export.php?file=$filename";
         }
-        protected function slug(string $userId): string
-        {
-            return ''; // Not used
-        }
         protected function path(string $filename): string
         {
             return "users/$filename";
         }
     },
-    // Comment all to use the default secret config provider.
+    // Comment all to use the default secret config provider, which reads secret from the .env.dbadmin file.
     'secret' => [
-        'reader' => InfisicalConfigProvider::class,
-        'key' => fn() => new class implements KeyBuilderInterface {
-            public function build(string $prefix, string $option = ''): string
-            {
-                // $username = Auth::userId(); // Use this to customize the key.
-                return "users.{$prefix}.{$option}";
-            }
-        },
-        // 'reader' => AwsSecretConfigProvider::class,
-        // 'key' => fn() => new class implements KeyBuilderInterface {
+        // 'reader' => Provider\Secret\InfisicalConfigProvider::class,
+        // 'key' => fn() => new class implements Provider\Secret\KeyBuilderInterface {
+        //     public function build(string $prefix, string $option = ''): string
+        //     {
+        //         // $username = Auth::userId(); // Use this to customize the key.
+        //         return "users.{$prefix}.{$option}";
+        //     }
+        // },
+        // 'reader' => Provider\Secret\AwsSecretConfigProvider::class,
+        // 'key' => fn() => new class implements Provider\Secret\KeyBuilderInterface {
         //     public function build(string $prefix, string $option = ''): string
         //     {
         //         // $username = Auth::userId(); // Use this to customize the key.
@@ -125,16 +106,16 @@ return [
         //         return "users.{$prefix}";
         //     }
         // },
-        // 'reader' => GcpSecretConfigProvider::class,
-        // 'key' => fn() => new class implements KeyBuilderInterface {
+        // 'reader' => Provider\Secret\GcpSecretConfigProvider::class,
+        // 'key' => fn() => new class implements Provider\Secret\KeyBuilderInterface {
         //     public function build(string $prefix, string $option = ''): string
         //     {
         //         // $username = Auth::userId(); // Use this to customize the key.
         //         return "db.users.{$prefix}.{$option}";
         //     }
         // },
-        // 'reader' => OpenBaoConfigProvider::class,
-        // 'key' => fn() => new class implements KeyBuilderInterface {
+        // 'reader' => Provider\Secret\OpenBaoConfigProvider::class,
+        // 'key' => fn() => new class implements Provider\Secret\KeyBuilderInterface {
         //     public function build(string $prefix, string $option = ''): string
         //     {
         //         // $username = Auth::userId(); // Use this to customize the key.
