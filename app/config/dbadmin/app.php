@@ -25,7 +25,7 @@ return [
                 'builder' => false,
                 'library' => false,
             ],
-            'enable' => [
+            'show' => [
                 'preferences' => false,
                 'history' => false,
                 'favorite' => false,
