@@ -40,5 +40,10 @@ ContainerWrapper::registerLocalServices([
     'filename' => log_file(),
 ]);
 $jaxon->di()->setLogger(Logger::instance());
+
 setup_app();
+// Register the view templates.
+$templateDir = "$baseDir/views/" . $jaxon->getAppOption('template');
+$jaxon->template()->addNamespace('tpl', $templateDir, '.php');
+
 $jaxon->app()->setup(setup_file());
