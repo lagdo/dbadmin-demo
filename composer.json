@@ -15,6 +15,12 @@
         "issues": "https://github.com/lagdo/dbadmin-demo/issues",
         "source": "https://github.com/lagdo/dbadmin-demo"
     },
+    "repositories": {
+        "itk-dev/azure-key-vault-php": {
+            "type": "vcs",
+            "url": "https://github.com/feuzeu/AzureKeyVaultPhp"
+        }
+    },
     "require": {
         "php": ">=8.1.0",
         "lagdo/ui-builder-bootstrap5": "0.12.*",
@@ -27,6 +33,7 @@
         "csharpru/vault-php": "^4.4",
         "google/cloud-secret-manager": "^2.3",
         "infisical/php-sdk": "^0.0.2",
+        "itk-dev/azure-key-vault-php": "dev-main",
         "vlucas/phpdotenv": "^5.4.1"
     },
     "minimum-stability": "dev",

@@ -106,7 +106,7 @@ return [
         //     public function build(string $prefix, string $option = ''): string
         //     {
         //         // $username = Auth::userId(); // Use this to customize the key.
-        //         // User names and passwords are stored in the same entries.
+        //         // A single entry stores the user name and password in a json payload.
         //         return "users.{$prefix}";
         //     }
         // },
@@ -125,6 +125,14 @@ return [
         //         // $username = Auth::userId(); // Use this to customize the key.
         //         // The key is prefixed with "data/", for the KV2 API.
         //         return "data/db.users.{$prefix}.{$option}";
+        //     }
+        // },
+        // 'reader' => Provider\Secret\AzureVaultConfigProvider::class,
+        // 'key' => fn() => new class implements Provider\Secret\KeyBuilderInterface {
+        //     public function build(string $prefix, string $option = ''): string
+        //     {
+        //         // $username = Auth::userId(); // Use this to customize the key.
+        //         return 'db-users-' . str_replace('.', '-', $prefix) . "-$option";
         //     }
         // },
     ],
