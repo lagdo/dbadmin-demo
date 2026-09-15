@@ -27,7 +27,7 @@
         "lagdo/dbadmin-driver-mysql": "0.23.*",
         "lagdo/dbadmin-driver-pgsql": "0.23.*",
         "lagdo/dbadmin-driver-sqlite": "0.23.*",
-        "lagdo/jaxon-dbadmin": "0.34.*",
+        "lagdo/jaxon-dbadmin": "0.35.*",
         "alibabacloud/kms-20160120": "^2.0",
         "aws/aws-sdk-php": "^3.379",
         "csharpru/vault-php": "^4.4",
