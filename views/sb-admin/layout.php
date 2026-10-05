@@ -13,34 +13,21 @@
       html {
         font-size: 14px;
       }
-      .row {
-        margin-bottom: 10px;
-      }
-      .sb-sidenav-menu {
-        padding-top: 20px;
-        padding-left: 7px;
-      }
-      .sb-sidenav-menu > .row {
-        margin-right: 0px;
-      }
-      #layoutSidenav_content {
-          padding-top: 10px;
-      }
     </style>
     <?= $this->htmlHeader ?>
   </head>
 
   <body>
     <div id="layoutSidenav">
-      <div id="layoutSidenav_content">
+      <div id="layoutSidenav_content" style="padding-top: 10px;">
         <main>
           <?= $this->pageContent ?>
         </main>
       </div>
     </div>
-  </body>
 
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-  <?= $this->htmlFooter ?>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <?= $this->htmlFooter ?>
+  </body>
 </html>

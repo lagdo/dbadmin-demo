@@ -19,11 +19,9 @@ echo $jaxon->getCss(), "\n";
 echo $jaxon->getJs(), "\n", $jaxon->getScript(), "\n";
 $readyScript = attr()->package(DbAdminPackage::class, 'ready');
 ?>
-<?php if($readyScript !== ''): ?>
 <script type='text/javascript'>
   <?= $readyScript ?>;
 </script>
-<?php endif ?>
 <?php $this->endblock() ?>
 
 <?php $this->block('pageContent') ?>

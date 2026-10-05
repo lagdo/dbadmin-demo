@@ -3,10 +3,14 @@
 use Lagdo\DbAdmin\Support\Facade\Auth;
 use Lagdo\DbAdmin\Support\Provider;
 use Lagdo\DbAdmin\Support\Service;
+use Lagdo\UiBuilder\Bootstrap5\Builder;
 
 return [
     'ui' => [
-        'template' => 'bootstrap5',
+        'template' => [
+            'name' => 'sb-admin',
+            'builder' => Builder::class,
+        ],
         'assets' => [
             'url' => '/dbadmin',
         ],

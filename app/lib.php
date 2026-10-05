@@ -1,5 +1,8 @@
 <?php
 
+use Lagdo\DbAdmin\App\DbAdminPackage;
+use Lagdo\DbAdmin\App\DbAuditPackage;
+
 if (!function_exists('env'))
 {
     function env(string $name, mixed $default = null): mixed
@@ -26,4 +29,12 @@ function log_file(): string
 function setup_file(): string
 {
     return __DIR__ . '/config/jaxon.php';
+}
+
+function setup_app(): void
+{
+    $configDir = __DIR__ . '/config/dbadmin';
+    ($_GET['page'] ?? '') !== 'audit' ?
+        DbAdminPackage::register($configDir, 'ajax.php') :
+        DbAuditPackage::register($configDir, 'ajax.php?page=audit');
 }
