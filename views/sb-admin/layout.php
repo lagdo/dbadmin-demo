@@ -6,28 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Jaxon DbAdmin Demo</title>
-    <link href="sb-admin/dist/css/styles.css" rel="stylesheet" />
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <title>Jaxon DbAdmin</title>
+
+    <link href="/sb-admin/dist/css/styles.css" rel="stylesheet" />
     <style>
       html {
         font-size: 14px;
       }
     </style>
+
     <?= $this->htmlHeader ?>
   </head>
 
   <body>
     <div id="layoutSidenav">
-      <div id="layoutSidenav_content" style="padding-top: 10px;">
+      <div id="layoutSidenav_content" style="padding-top: 5px;">
         <main>
           <?= $this->pageContent ?>
         </main>
       </div>
     </div>
 
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
     <?= $this->htmlFooter ?>
   </body>
 </html>
