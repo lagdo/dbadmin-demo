@@ -3,8 +3,7 @@
 use Lagdo\DbAdmin\App\DbAdminPackage;
 use Lagdo\DbAdmin\App\DbAuditPackage;
 
-if (!function_exists('env'))
-{
+if (!function_exists('env')) {
     function env(string $name, mixed $default = null): mixed
     {
         return $_ENV[$name] ?? $default;
@@ -29,6 +28,12 @@ function log_file(): string
 function setup_file(): string
 {
     return __DIR__ . '/config/jaxon.php';
+}
+
+function send_error(string $message): void
+{
+    header('Content-Type: text/plain; charset=utf-8');
+    echo $message, "\n";
 }
 
 function setup_app(): void
