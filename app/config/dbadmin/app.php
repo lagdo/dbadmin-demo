@@ -22,7 +22,7 @@ return [
             'url' => '/dbadmin',
         ],
         'toast' => [
-            'lib' => 'butterup',
+            'lib' => 'noty',
         ],
         'query' => [
             // 'cm' for CodeMirror or 'ace' for Ace Editor.

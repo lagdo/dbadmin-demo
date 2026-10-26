@@ -21,12 +21,12 @@ return [
         ],
         'dialogs' => [
             'default' => [
-                'modal' => 'bootbox',
+                'modal' => 'bulma',
                 'alert' => 'sweetalert',
                 'confirm' => 'sweetalert',
             ],
             'lib' => [
-                'use' => ['butterup'],
+                'use' => ['noty'],
             ],
         ],
         'storage' => [

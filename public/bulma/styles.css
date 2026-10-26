@@ -1,0 +1,165 @@
+.buttons.is-fullwidth, .field.is-fullwidth {
+  display: flex;
+  width: 100%;
+}
+
+.button {
+  height: 35px;
+  padding: 7px 9px;
+}
+
+.buttons.is-fullwidth .button,
+  .field div.control:not(.is-checkbox, .is-radio, .is-switch, .is-label) {
+  flex: 1;
+}
+
+.card-content {
+  padding: 1rem;
+}
+
+table, .control .select, .control .select select {
+  width: 100%;
+}
+
+/* 2. Don't allow line breaks between menu buttons in table cells */
+td .buttons.has-addons {
+  display: inline-flex;
+  flex-wrap: nowrap;
+}
+td .buttons.has-addons > div {
+  flex-shrink: 0;
+}
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs ul li.is-active a.tab-nav-item {
+  color: hsl(171, 100%, 41%); /* has-text-primary */
+}
+
+/* Panel menu */
+nav.panel .panel-block.is-active {
+  color: hsl(171, 100%, 96%); /* has-text-primary-light */
+  background-color: hsl(171, 100%, 41%); /* has-background-primary */
+}
+nav.panel.is-menu .panel-block:first-child {
+  border-start-end-radius: var(--bulma-panel-radius);
+  border-start-start-radius: var(--bulma-panel-radius);
+}
+nav.panel.is-menu.is-horizontal {
+  display: flex;
+  flex-direction: row;
+}
+nav.panel.is-menu.is-horizontal .panel-block {
+  flex: 1 1 auto;
+  justify-content: center;
+}
+nav.panel.is-menu.is-horizontal .panel-block:not(:last-child) {
+  border-bottom: none;
+  border-right: var(--bulma-panel-item-border);
+}
+
+nav.panel.is-menu.is-horizontal .panel-block:first-child {
+  border-start-start-radius: var(--bulma-panel-radius);
+  border-start-end-radius: 0;
+  border-end-start-radius: var(--bulma-panel-radius);
+  border-end-end-radius: 0;
+}
+nav.panel.is-menu.is-horizontal .panel-block:last-child {
+  border-start-start-radius: 0;
+  border-start-end-radius: var(--bulma-panel-radius);
+  border-end-start-radius: 0;
+  border-end-end-radius: var(--bulma-panel-radius);
+}
+
+/* Pagination button color */
+.pagination-list li.enabled > a.pagination-link.is-current {
+  background-color: hsl(171, 100%, 41%); /* has-background-primary */
+  border-color: hsl(171, 100%, 41%); /* has-background-primary */
+}
+
+/* Fix extra margin on the last item when div with addons are in the dame container */
+.field.has-addons {
+  margin-bottom: 0;
+}
+
+.buttons.has-addons, nav.breadcrumb {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Add borders and align checkbox/radio containers */
+.field.has-addons > .control:is(.is-checkbox, .is-radio, .is-switch) {
+  display: flex;
+  align-items: center;
+  padding-inline: 0.75em;
+  border: 1px solid var(--bulma-border);
+  border-radius: 0;
+}
+
+/* Round the left corners */
+.field.has-addons > .control:is(.is-checkbox, .is-radio, .is-switch):first-child {
+  border-start-start-radius: var(--bulma-control-radius);
+  border-end-start-radius: var(--bulma-control-radius);
+}
+
+/* Round the right corners */
+.field.has-addons > .control:is(.is-checkbox, .is-radio, .is-switch):last-child {
+  border-start-end-radius: var(--bulma-control-radius);
+  border-end-end-radius: var(--bulma-control-radius);
+}
+
+/* Avoid doubled borders between adjacent controls */
+.field.has-addons > .control:is(.is-checkbox, .is-radio, .is-switch)
+  + .control:is(.is-checkbox, .is-radio, .is-switch) {
+  margin-inline-start: -1px;
+}
+
+/* Remove default label margins and keep contents vertically aligned */
+.field.has-addons > .control:is(.is-checkbox, .is-radio, .is-switch) > label:is(.checkbox, .radio) {
+  margin: 0;
+}
+
+.buttons.has-addons .dropdown:not(:last-child) .button {
+  border-end-end-radius: 0;
+  border-start-end-radius: 0;
+  margin-inline-end: -1px;
+}
+
+.buttons.has-addons .dropdown:not(:first-child) .button {
+  border-end-start-radius: 0;
+  border-start-start-radius: 0;
+}
+
+/* From the Bulma docs page */
+.breadcrumb li > span {
+  align-items: center;
+  /*color: var(--bulma-breadcrumb-item-color);*/
+  display: flex;
+  justify-content: center;
+  padding: var(--bulma-breadcrumb-item-padding-vertical) var(--bulma-breadcrumb-item-padding-horizontal);
+}
+
+@media screen and (min-width: 769px) {
+  #bulma-modal-container .modal-card, #bulma-modal-container .modal-content {
+    width: 680px;
+  }
+}
+
+.badge.is-inside-right {
+  bottom: auto;
+  left: auto;
+  right: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.badge.is-inside-left {
+  bottom: 0;
+  left: 0;
+  right: auto;
+  top: 50%;
+  transform: translate(50%, -50%);
+}
