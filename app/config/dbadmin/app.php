@@ -1,23 +1,14 @@
 <?php
 
-use Lagdo\DbAdmin\Support\Facade\Auth;
 use Lagdo\DbAdmin\Support\Provider;
 use Lagdo\DbAdmin\Support\Service;
-use Lagdo\UiBuilder\Bootstrap5;
 
 return [
     'ui' => [
-        'template' => [
-            // SB Admin template: https://startbootstrap.com/template/sb-admin
-            // 'name' => 'sb-admin',
-            // 'builder' => Bootstrap5\Builder::class,
-            // CoreUI 5 template: https://coreui.io/product/free-bootstrap-admin-template/
-            'name' => 'coreui5',
-            'builder' => Bootstrap5\CoreUi\Builder::class,
-            // Plain Admin template: https://plainadmin.com/
-            // 'name' => 'plain-admin',
-            // 'builder' => Bootstrap5\Builder::class,
-        ],
+        'template' => 'sb-admin',
+        // 'template' => 'coreui5',
+        // 'template' => 'plain-admin',
+        // 'template' => 'bulma',
         'assets' => [
             'url' => '/dbadmin',
         ],
@@ -103,48 +94,9 @@ return [
         }
     },
     // Comment all to use the default secret config provider, which reads secret from the .env.dbadmin file.
-    'secret' => [
-        // 'reader' => Provider\Secret\InfisicalConfigProvider::class,
-        // 'key' => fn() => new class implements Provider\Secret\KeyBuilderInterface {
-        //     public function build(string $prefix, string $option = ''): string
-        //     {
-        //         // $username = Auth::userId(); // Use this to customize the key.
-        //         return "users.{$prefix}.{$option}";
-        //     }
-        // },
-        // 'reader' => Provider\Secret\AwsSecretConfigProvider::class,
-        // 'key' => fn() => new class implements Provider\Secret\KeyBuilderInterface {
-        //     public function build(string $prefix, string $option = ''): string
-        //     {
-        //         // $username = Auth::userId(); // Use this to customize the key.
-        //         // A single entry stores the user name and password in a json payload.
-        //         return "users.{$prefix}";
-        //     }
-        // },
-        // 'reader' => Provider\Secret\GcpSecretConfigProvider::class,
-        // 'key' => fn() => new class implements Provider\Secret\KeyBuilderInterface {
-        //     public function build(string $prefix, string $option = ''): string
-        //     {
-        //         // $username = Auth::userId(); // Use this to customize the key.
-        //         return "db.users.{$prefix}.{$option}";
-        //     }
-        // },
-        // 'reader' => Provider\Secret\OpenBaoConfigProvider::class,
-        // 'key' => fn() => new class implements Provider\Secret\KeyBuilderInterface {
-        //     public function build(string $prefix, string $option = ''): string
-        //     {
-        //         // $username = Auth::userId(); // Use this to customize the key.
-        //         // The key is prefixed with "data/", for the KV2 API.
-        //         return "data/db.users.{$prefix}.{$option}";
-        //     }
-        // },
-        // 'reader' => Provider\Secret\AzureVaultConfigProvider::class,
-        // 'key' => fn() => new class implements Provider\Secret\KeyBuilderInterface {
-        //     public function build(string $prefix, string $option = ''): string
-        //     {
-        //         // $username = Auth::userId(); // Use this to customize the key.
-        //         return 'db-users-' . str_replace('.', '-', $prefix) . "-$option";
-        //     }
-        // },
-    ],
+    // 'secret' => 'infisical',
+    // 'secret' => 'aws-secret',
+    // 'secret' => 'gcp-secret',
+    // 'secret' => 'openbao',
+    // 'secret' => 'azure-vault',
 ];

@@ -21,7 +21,7 @@ return [
         ],
         'dialogs' => [
             'default' => [
-                'modal' => 'bulma',
+                'modal' => 'bootstrap5',
                 'alert' => 'sweetalert',
                 'confirm' => 'sweetalert',
             ],
