@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/lib.php';
 require dirname(__DIR__, 2) . '/vendor/autoload.php';
+require_once __DIR__ . '/lib.php';
 
 use Lagdo\DbAdmin\App\Ajax\Exception\AppException;
 use Lagdo\DbAdmin\App\Ajax\Exception\ValidationException;
