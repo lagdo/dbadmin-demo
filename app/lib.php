@@ -1,7 +1,12 @@
 <?php
 
+use Lagdo\DbAdmin\App\Ui\AdminUiBuilder;
+use Lagdo\DbAdmin\App\Ui\AuditUiBuilder;
 use Lagdo\DbAdmin\App\DbAdminPackage;
 use Lagdo\DbAdmin\App\DbAuditPackage;
+
+use function Jaxon\attr;
+use function Jaxon\jaxon;
 
 if (!function_exists('env')) {
     function env(string $name, mixed $default = null): mixed
@@ -13,6 +18,13 @@ if (!function_exists('env')) {
 function page(): string
 {
     return ($_GET['page'] ?? '') === 'audit' ? 'dbaudit' : 'dbadmin';
+}
+
+function ui_builder(): mixed
+{
+    $class = ($_GET['page'] ?? '') === 'audit' ?
+        AuditUiBuilder::class : AdminUiBuilder::class;
+    return jaxon()->di()->g($class);
 }
 
 function base_dir(): string
@@ -42,4 +54,26 @@ function setup_app(): void
     ($_GET['page'] ?? '') !== 'audit' ?
         DbAdminPackage::register($configDir, 'ajax.php') :
         DbAuditPackage::register($configDir, 'ajax.php?page=audit');
+}
+
+function jaxon_css(): string
+{
+    return jaxon()->css();
+}
+
+function jaxon_js(): string
+{
+    return jaxon()->js();
+}
+
+function jaxon_script(): string
+{
+    return jaxon()->script();
+}
+
+function jaxon_ready(): string
+{
+    $class = ($_GET['page'] ?? '') === 'audit' ?
+        DbAuditPackage::class : DbAdminPackage::class;
+    return attr()->package($class, 'ready');
 }
