@@ -12,9 +12,6 @@ return [
         'assets' => [
             'url' => '/dbadmin',
         ],
-        'toast' => [
-            'lib' => 'noty',
-        ],
         'query' => [
             // 'cm' for CodeMirror or 'ace' for Ace Editor.
             'editor' => 'cm',

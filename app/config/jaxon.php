@@ -21,12 +21,13 @@ return [
         ],
         'dialogs' => [
             'default' => [
-                'modal' => 'bootstrap5',
+                'modal' => 'bootbox',
+                'toast' => 'notyf',
                 'alert' => 'sweetalert',
                 'confirm' => 'sweetalert',
             ],
             'lib' => [
-                'use' => ['noty'],
+                'use' => ['notyf'],
             ],
         ],
         'storage' => [
