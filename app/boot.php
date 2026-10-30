@@ -21,7 +21,7 @@ $warningHandler = fn(Exception $e) =>
 $errorHandler = fn(Exception $e) =>
     $dialog->title('Error')->error($e->getMessage());
 $jaxon->callback()
-    ->error($warningHandler, AppException::class)
+    // ->error($warningHandler, AppException::class)
     ->error($errorHandler, DriverException::class)
     ->error($errorHandler, ValidationException::class)
     ->error($errorHandler);

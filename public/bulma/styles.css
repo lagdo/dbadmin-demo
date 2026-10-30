@@ -142,12 +142,6 @@ nav.panel.is-menu.is-horizontal .panel-block:last-child {
   padding: var(--bulma-breadcrumb-item-padding-vertical) var(--bulma-breadcrumb-item-padding-horizontal);
 }
 
-@media screen and (min-width: 769px) {
-  #bulma-modal-container .modal-card, #bulma-modal-container .modal-content {
-    width: 680px;
-  }
-}
-
 .badge.is-inside-right {
   bottom: auto;
   left: auto;

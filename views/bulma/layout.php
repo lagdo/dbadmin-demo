@@ -18,6 +18,14 @@
       html {
         font-size: 14px;
       }
+      header.modal-card-head, section.modal-card-body, footer.modal-card-foot {
+        padding: 1rem;
+      }
+      @media screen and (min-width: 769px) {
+        #bulma-modal-container .modal-card, #bulma-modal-container .modal-content {
+          width: 800px;
+        }
+      }
     </style>
 
     <?= $this->htmlHeader ?>
