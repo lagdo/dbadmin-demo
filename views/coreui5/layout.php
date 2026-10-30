@@ -13,6 +13,9 @@
       html {
         font-size: 14px;
       }
+      #bootstrap5Modal .modal-dialog {
+        max-width: 800px;
+      }
     </style>
 
     <?= $this->htmlHeader ?>

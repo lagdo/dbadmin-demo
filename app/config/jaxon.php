@@ -20,12 +20,7 @@ return [
             // 'file' => '',
         ],
         'dialogs' => [
-            'default' => [
-                'modal' => 'bootbox',
-                'toast' => 'notyf',
-                'alert' => 'sweetalert',
-                'confirm' => 'sweetalert',
-            ],
+            // Defined in the services/template.php file.
             'lib' => [
                 'use' => ['notyf'],
             ],

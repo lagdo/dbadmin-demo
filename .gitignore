@@ -1,6 +1,7 @@
 composer.lock
 .env*
 cache/
+app/config/dbadmin-dev/
 public/dbadmin/
 public/jaxon/
 /gcp/
