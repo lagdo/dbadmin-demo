@@ -1,9 +1,9 @@
 <?php
 
-use Lagdo\DbAdmin\App\Ui\AdminUiBuilder;
-use Lagdo\DbAdmin\App\Ui\AuditUiBuilder;
 use Lagdo\DbAdmin\App\DbAdminPackage;
 use Lagdo\DbAdmin\App\DbAuditPackage;
+use Lagdo\DbAdmin\App\Ui\AdminUiBuilder;
+use Lagdo\DbAdmin\App\Ui\AuditUiBuilder;
 
 use function Jaxon\attr;
 use function Jaxon\jaxon;

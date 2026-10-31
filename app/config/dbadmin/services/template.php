@@ -18,7 +18,7 @@ return [
     'coreui5' => [
         'builder' => UiBuilder\Bootstrap5\CoreUi\Builder::class,
         'dialogs' => [
-            'modal' => 'bootstrap5',
+            'modal' => 'bootbox',
             'toast' => 'notyf',
             'alert' => 'sweetalert',
             'confirm' => 'sweetalert',
