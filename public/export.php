@@ -11,18 +11,22 @@ if ($filename === null) {
 }
 
 $options = Export::options($filename);
-$chunks = $options !== null ? Export::export($options) : null;
-if ($chunks === null) {
+$exports = Export::export($options);
+if ($exports === null) {
     send_error("Unable to export file $filename.");
     return;
 }
 
-header("Content-Type: {$options->contentType}; charset=utf-8");
-header("Content-Disposition: {$options->contentDisposition}; filename=\"{$options->filename}\"");
+header('Content-Type: ' . $options->contentType());
+header('Content-Disposition: ' . $options->contentDisposition());
 header('Cache-Control: no-cache');
+header('Connection: keep-alive');
 header('X-Accel-Buffering: no');
 
-foreach ($chunks as $chunk) {
-    echo $chunk;
+foreach ($exports as $export) {
+    echo $export;
+    if (ob_get_level() > 0) {
+        ob_flush();
+    }
     flush();
 }
