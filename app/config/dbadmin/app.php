@@ -8,12 +8,6 @@ return [
     'auth' => 'default',
 
     /*
-     * An export service defined in services/export.php.
-     */
-    // 'export' => null, // No export.
-    'export' => 'default',
-
-    /*
      * A secret service defined in services/secret.php.
      * infisical, aws-secret, gcp-secret, openbao, or azure-vault.
      */
