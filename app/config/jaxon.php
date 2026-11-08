@@ -39,10 +39,9 @@ return [
         ],
         'upload' => [
             'enabled' => true,
-            'files' => [
-                'sql_files' => [
-                    'storage' => 'uploads',
-                ],
+            'default' => [
+                'directory' => "$baseDir/uploads",
+                // 'storage' => 'uploads',
             ],
         ],
     ],
