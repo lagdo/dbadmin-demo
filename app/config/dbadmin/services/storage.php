@@ -6,33 +6,53 @@ use Lagdo\DbAdmin\Support\Service\Import;
 return [
     // 'export' => null, // No export.
     'export' => fn() => new class extends Export\AbstractStorage {
-        protected function storage(): string
+        public function status(): array
         {
-            return 'exports';
+            return [
+                'storage' => 'export_status',
+            ];
         }
-        protected function url(string $filename): string
+        public function path(string $filename): string
+        {
+            return $filename;
+        }
+        public function url(string $filename): string
         {
             return "/export.php?file=$filename";
-        }
-        protected function path(string $filename): string
-        {
-            return "users/$filename";
         }
     },
 
     // 'import' => null, // No import.
     'import' => fn() => new class extends Import\AbstractStorage {
-        protected function storage(): string
+        public function status(): array
         {
-            return 'imports';
+            return [
+                'storage' => 'import_status',
+            ];
+        }
+        public function path(string $filename): string
+        {
+            return $filename;
         }
         public function url(string $filename): string
         {
             return "/import.php?file=$filename";
         }
-        protected function path(string $filename): string
+        public function dumps(): array
         {
-            return "users/$filename";
+            return [
+                'databases' => [
+                    'label' => 'Database dumps',
+                    // 'directory' => '',
+                    'storage' => 'import_dumps',
+                ],
+            ];
+        }
+        public function dumpLabels(): array
+        {
+            return [
+                '6aefc8cb1e449.sql' => 'Sample import database',
+            ];
         }
     },
 ];

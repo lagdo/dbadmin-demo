@@ -3,6 +3,7 @@
 require_once dirname(__DIR__) . '/app/boot.php';
 
 use Lagdo\DbAdmin\Support\Facade\Import;
+use Lagdo\DbAdmin\Support\Service\Import\ImportService;
 
 $filename = $_GET['file'] ?? null;
 if ($filename === null) {
@@ -10,8 +11,10 @@ if ($filename === null) {
     return;
 }
 
-$options = Import::options($filename);
-$imports = Import::import($options);
+/** @var ImportService */
+$service = Import::instance();
+$options = $service->options($filename, ['timeLimit' => 0]);
+$imports = $options === null ? null : $service->import($options);
 if ($imports === null) {
     send_error("Unable to import file $filename.");
     return;

@@ -27,21 +27,37 @@ return [
         ],
         'storage' => [
             'stores' => [
-                'uploads' => [
+                'export_status' => [
                     'adapter' => 'local',
-                    'dir' => "$baseDir/uploads",
+                    'dir' => "$baseDir/exports/status",
                 ],
-                'exports' => [
+                'import_uploads' => [
                     'adapter' => 'local',
-                    'dir' => "$baseDir/exports",
+                    'dir' => "$baseDir/imports/uploads",
+                ],
+                'import_dumps' => [
+                    'adapter' => 'local',
+                    'dir' => "$baseDir/imports/dumps",
+                ],
+                'import_status' => [
+                    'adapter' => 'local',
+                    'dir' => "$baseDir/imports/status",
+                ],
+                'pgsql_dumps' => [
+                    'adapter' => 'local',
+                    'dir' => '/var/www/docker/scripts/seeds/pgsql/sql',
+                ],
+                'mysql_dumps' => [
+                    'adapter' => 'local',
+                    'dir' => '/var/www/docker/scripts/seeds/mysql/sql',
                 ],
             ],
         ],
         'upload' => [
             'enabled' => true,
             'default' => [
-                'directory' => "$baseDir/uploads",
-                // 'storage' => 'uploads',
+                'directory' => "$baseDir/imports/uploads",
+                // 'storage' => 'import_uploads',
             ],
         ],
     ],

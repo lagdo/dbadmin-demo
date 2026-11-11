@@ -3,6 +3,7 @@
 require_once dirname(__DIR__) . '/app/boot.php';
 
 use Lagdo\DbAdmin\Support\Facade\Export;
+use Lagdo\DbAdmin\Support\Service\Export\ExportService;
 
 $filename = $_GET['file'] ?? null;
 if ($filename === null) {
@@ -10,8 +11,10 @@ if ($filename === null) {
     return;
 }
 
-$options = Export::options($filename);
-$exports = Export::export($options);
+/** @var ExportService */
+$service = Export::instance();
+$options = $service->options($filename, ['timeLimit' => 0]);
+$exports = $options === null ? null : $service->export($options);
 if ($exports === null) {
     send_error("Unable to export file $filename.");
     return;

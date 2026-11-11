@@ -4,13 +4,11 @@ cache/
 app/config/dbadmin-dev/
 public/dbadmin/
 public/jaxon/
-/gcp/
 /vendor/
-/build/
 /.idea/
 /logs/*log
 /exports/
-/uploads/
+/imports/
 /views/daisyui/
 /views/flowbite/
 /views/preline/
