@@ -14,7 +14,7 @@
         font-size: 14px;
       }
       #bootstrap5Modal .modal-dialog {
-        max-width: 800px;
+        max-width: 700px;
       }
     </style>
 
@@ -35,5 +35,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
     <?= $this->htmlFooter ?>
+
   </body>
 </html>

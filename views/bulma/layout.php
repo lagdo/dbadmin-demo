@@ -23,7 +23,7 @@
       }
       @media screen and (min-width: 769px) {
         #bulma-modal-container .modal-card, #bulma-modal-container .modal-content {
-          width: 800px;
+          width: 700px;
         }
       }
     </style>

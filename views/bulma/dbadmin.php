@@ -11,11 +11,13 @@
 
 <script type='text/javascript'>
   <?= jaxon_ready() ?>
+
 </script>
 <?php $this->endblock() ?>
 
 <?php $this->block('pageContent') ?>
         <div style="padding-right: 1rem; padding-left: 1rem;">
           <?= ui_builder()->layout() ?>
+
         </div>
 <?php $this->endblock() ?>
