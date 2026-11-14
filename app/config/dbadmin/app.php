@@ -2,12 +2,6 @@
 
 return [
     /*
-     * An auth service defined in services/auth.php.
-     */
-    // 'auth' => null, // No auth.
-    'auth' => 'default',
-
-    /*
      * A secret service defined in services/secret.php.
      * infisical, aws-secret, gcp-secret, openbao, or azure-vault.
      */
