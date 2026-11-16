@@ -20,7 +20,7 @@ return [
             // 'file' => '',
         ],
         'dialogs' => [
-            // Defined in the services/template.php file.
+            // The dialogs libraries are defined in the dbadmin/services/template.php file.
             'lib' => [
                 'use' => ['notyf'],
             ],
@@ -58,6 +58,7 @@ return [
             'default' => [
                 'directory' => "$baseDir/imports/uploads",
                 // 'storage' => 'import_uploads',
+                'extensions' => ['sql', 'gz', 'gzip', 'bz2', 'bzip2'],
             ],
         ],
     ],
