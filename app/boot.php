@@ -3,6 +3,7 @@
 require dirname(__DIR__, 2) . '/vendor/autoload.php';
 require_once __DIR__ . '/lib.php';
 
+use Jaxon\Exception\RequestException;
 use Lagdo\DbAdmin\App\Ajax\Exception\AppException;
 use Lagdo\DbAdmin\App\Ajax\Exception\ValidationException;
 use Lagdo\DbAdmin\Driver\Exception\DriverException;
@@ -21,7 +22,9 @@ $warningHandler = fn(Exception $e) =>
 $errorHandler = fn(Exception $e) =>
     $dialog->title('Error')->error($e->getMessage());
 $jaxon->callback()
-    // ->error($warningHandler, AppException::class)
+    ->invalid($errorHandler)
+    ->error($warningHandler, AppException::class)
+    ->error($errorHandler, RequestException::class)
     ->error($errorHandler, DriverException::class)
     ->error($errorHandler, ValidationException::class)
     ->error($errorHandler);
