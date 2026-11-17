@@ -22,7 +22,7 @@ return [
         'dialogs' => [
             // The dialogs libraries are defined in the dbadmin/services/template.php file.
             'lib' => [
-                'use' => ['notyf'],
+                'use' => ['bootstrap5', 'bulma', 'sweetalert', 'cute', 'notyf'],
             ],
         ],
         'storage' => [

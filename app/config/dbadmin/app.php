@@ -15,7 +15,7 @@ return [
          */
         'template' => 'bulma',
         'assets' => [
-            'url' => '/dbadmin',
+            'url' => '/dbadmin-0.15.1',
         ],
         'query' => [
             // 'cm' for CodeMirror or 'ace' for Ace Editor.

@@ -9,7 +9,10 @@ return [
         public function status(): array
         {
             return [
-                'storage' => 'export_status',
+                // The path to a local directory
+                // 'directory' => '',
+                // A storage entry in the Jaxon config.
+                // 'storage' => '',
             ];
         }
         public function path(string $filename): string
@@ -27,7 +30,10 @@ return [
         public function status(): array
         {
             return [
-                'storage' => 'import_status',
+                // The path to a local directory
+                // 'directory' => '',
+                // A storage entry in the Jaxon config.
+                // 'storage' => '',
             ];
         }
         public function path(string $filename): string
@@ -41,18 +47,19 @@ return [
         public function dumps(): array
         {
             return [
-                'databases' => [
-                    'label' => 'Database dumps',
-                    // 'directory' => '',
-                    'storage' => 'import_dumps',
-                ],
+                // 'databases' => [
+                //     // A label to be display in the select form.
+                //     'label' => 'Database dumps',
+                //     // The path to a local directory
+                //     'directory' => '',
+                //     // A storage entry in the Jaxon config.
+                //     'storage' => '',
+                // ],
             ];
         }
         public function dumpLabels(): array
         {
-            return [
-                '6aefc8cb1e449.sql' => 'Sample import database',
-            ];
+            return [];
         }
     },
 ];
