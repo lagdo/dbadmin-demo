@@ -20,7 +20,7 @@ function page(): string
     return ($_GET['page'] ?? '') === 'audit' ? 'dbaudit' : 'dbadmin';
 }
 
-function ui_builder(): mixed
+function ui_builder(): AuditUiBuilder|AdminUiBuilder
 {
     $class = ($_GET['page'] ?? '') === 'audit' ?
         AuditUiBuilder::class : AdminUiBuilder::class;
